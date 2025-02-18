@@ -1,0 +1,52 @@
+%
+%  $Description: Author guidelines and sample document in LaTeX 2.09$ 
+%
+%  $Author: ienne $
+%  $Date: 1995/09/15 15:20:59 $
+%  $Revision: 1.4 $
+%
+
+\documentclass[10pt]{article} 
+\usepackage{latex8}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{Differential Analysis of LLMs in Text2SQL Generation}
+
+\author{Jaykumar Patel\\
+patel.jay4802@utexas.edu\\
+% For a paper whose authors are all at the same institution, 
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'', 
+% just like the second author.
+\and
+Laith Altarabishi\\
+laithaustin@utexas.edu\\
+\and
+Nidhi Dubagunta\\
+nidhi.dubagunta@utexas.edu\\
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Project Proposal}
+
+As large language models (LLMs) continue to envolve and improve, an interesting application of LLMs is in the generation of SQL queries from natural language. This is known as Text2SQL. 
+In our project, we will compare the performance of different LLMs in generating SQL queries from natural language. We will explore 2 different frameworks: \textbf{Agentless} and \textbf{Agentic}.
+
+\begin{enumerate}
+    \item \textbf{Agentless} frameworks are those that use an LLM to generate the response directly. This is synonymous with the use of a chatbot. For this framework, we will provide the complete schema of our dataset and the natural language query to the model. Then we will run the generated SQL query and evaluate the results.
+    \item \textbf{Agentic} frameworks are those where there are distinct agents that each play a different role in the generation of the response. For this framework, we will have 2 agents: a \textbf{Schema Agent} and a \textbf{Query Agent}. The \textbf{Schema Agent} will be responsible for retrieving the schemas of the relevant tables from the database given the natural language query. The \textbf{Query Agent} will be responsible for generating the SQL query. Then we will run the generated SQL query and evaluate the results.
+\end{enumerate}
+
+We will perform a differential analysis of the performance of 3 LLMs in the two frameworks. The LLMs we plan to use are: ChatGPT, Gemini, and Llama.
+
+\end{document}
