@@ -30,8 +30,7 @@ class ChatGPT_Text2SQL(AgenticFramework):
 
     # Create agent to retrieve the schemas of the tables
     def retrieve_schemas(self, query: str, contextCount: int) -> str:
-        numberOfTables = self.retrieve_number_of_tables(query)
-        relevantSchemas = SchemaHelper.retrieve_relevant_schemas(query, numberOfTables)
+        relevantSchemas = SchemaHelper.retrieve_relevant_schemas(query, contextCount)
         relevantSchemas = "\n".join(relevantSchemas)
         return relevantSchemas
 
