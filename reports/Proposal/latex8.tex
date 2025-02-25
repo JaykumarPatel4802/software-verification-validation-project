@@ -47,6 +47,6 @@ In our project, we will compare the performance of different LLMs in generating 
     \item \textbf{Agentic} frameworks are those where there are distinct agents that each play a different role in the generation of the response. For this framework, we will have 2 agents: a \textbf{Schema Agent} and a \textbf{Query Agent}. The \textbf{Schema Agent} will be responsible for retrieving the schemas of the relevant tables from the database given the natural language query. The \textbf{Query Agent} will be responsible for generating the SQL query. Then we will run the generated SQL query and evaluate the results.
 \end{enumerate}
 
-We will perform a differential analysis of the performance of 3 LLMs in the two frameworks. The LLMs we plan to use are: ChatGPT, Gemini, and Llama.
+The SQL database that we plan to use (tentative) is the \href{https://www.sqlitetutorial.net/sqlite-sample-database/}{Chinook sample database} which is a sample database provided by SQLite. For each of the tables in the database, we will determine the Schema, which will be used as the context for the LLMs. Additionally, we will determine 20 natural language queries, and their corresponding answers. Using that benchmark dataset, we will perform a differential analysis of the performance of 3 LLMs in the two frameworks. The LLMs we plan to use are: ChatGPT, Gemini, and Llama. 
 
 \end{document}
