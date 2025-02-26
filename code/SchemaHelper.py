@@ -13,11 +13,15 @@ class SchemaHelper:
     def retrieve_all_schemas(self) -> str:
         import os
 
-        if self.all_schemas is not []:
+        if self.all_schemas:
             return self.all_schemas
 
         schemas_directory = "database/schemas/"
         schemas = []
+
+        if not os.path.exists(schemas_directory):
+            print(f"Directory does not exist: {schemas_directory}")
+            return schemas  # Return an empty list if the directory doesn't exist
 
         for filename in os.listdir(schemas_directory):
             if filename.endswith('.txt'):

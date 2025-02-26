@@ -2,8 +2,15 @@ from AgenticFramework import AgenticFramework
 from langchain.chat_models import init_chat_model
 from dotenv import load_dotenv
 from SchemaHelper import SchemaHelper
+from pydantic import BaseModel, Field
 import json
 load_dotenv()
+
+class RelevantTablesCount(BaseModel):
+    number_of_tables: int = Field(description="The count of the number of relevant tables in the database")
+
+class GeneratedSQLQuery(BaseModel):
+    sql_query: str = Field(description="The generated SQL query")
 
 class ChatGPT_Text2SQL(AgenticFramework):
 
@@ -17,17 +24,15 @@ class ChatGPT_Text2SQL(AgenticFramework):
     def retrieve_number_of_tables(self, query: str) -> int:
         allSchemas = self.sh.all_schemas
         prompt = f"""
-        You are a helpful assistant that retrieves the number of tables that are relevant to the query.
+        You are a helpful assistant that retrieves the number of tables in a database that are relevant to the query.
         The query is: {query}
-        The schemas are: {allSchemas}
+        The schemas of the tables in the database are: {allSchemas}
 
-        Return the number of tables that are relevant to the query in the following JSON format:
-        {{
-            "number_of_tables": <number_of_tables>
-        }}
+        Determine the number of tables in the database that are relevant to the query.
         """
-        response = self.llm.invoke(prompt)
-        return json.loads(response)["number_of_tables"]
+        structured_llm = self.llm.with_structured_output(RelevantTablesCount)
+        response = structured_llm.invoke(prompt)
+        return response.number_of_tables
 
 
     # Create agent to retrieve the schemas of the tables
@@ -43,13 +48,11 @@ class ChatGPT_Text2SQL(AgenticFramework):
         The query is: {query}
         The relevant schemas are: {relevant_schemas}
 
-        Return the SQL query in the following JSON format:
-        {{
-            "sql_query": <sql_query>
-        }}
+        Determine the SQL query that can answer the natural language query.
         """
-        response = self.llm.invoke(prompt)
-        return json.loads(response)["sql_query"]
+        structured_llm = self.llm.with_structured_output(GeneratedSQLQuery)
+        response = structured_llm.invoke(prompt)
+        return response.sql_query
     
     # Create agent to execute the SQL query and retrieve the result
     def save_sql_query(self, query: str, sql_query: str) -> str:
