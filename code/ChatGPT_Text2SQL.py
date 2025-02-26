@@ -10,10 +10,12 @@ class ChatGPT_Text2SQL(AgenticFramework):
     def __init__(self):
         super().__init__()
         self.llm = init_chat_model("gpt-4o-mini", model_provider="openai")
+        self.sh = SchemaHelper()
+        self.sh.store_schemas()
 
     # Create agent to retrieve number of tables that are relevant to the query
     def retrieve_number_of_tables(self, query: str) -> int:
-        allSchemas = SchemaHelper.retrieve_all_documents()
+        allSchemas = self.sh.all_schemas
         prompt = f"""
         You are a helpful assistant that retrieves the number of tables that are relevant to the query.
         The query is: {query}
@@ -30,9 +32,9 @@ class ChatGPT_Text2SQL(AgenticFramework):
 
     # Create agent to retrieve the schemas of the tables
     def retrieve_schemas(self, query: str, contextCount: int) -> str:
-        relevantSchemas = SchemaHelper.retrieve_relevant_schemas(query, contextCount)
-        relevantSchemas = "\n".join(relevantSchemas)
-        return relevantSchemas
+        relevantSchemas = self.sh.retrieve_relevant_schemas(query, contextCount)
+        joinedRelevantSchemas = "\n\n----------\n\n".join(relevantSchemas)
+        return joinedRelevantSchemas
 
     # Create agent to use the schema to generate a SQL query given a natural language query
     def generate_sql_query(self, query: str, relevant_schemas: str) -> str:
@@ -58,3 +60,5 @@ class ChatGPT_Text2SQL(AgenticFramework):
         retrievedSchemas = self.retrieve_schemas(query, numRelevantTables)
         generatedSQLQuery = self.generate_sql_query(query, retrievedSchemas)
         self.save_sql_query(query, generatedSQLQuery)
+
+        return generatedSQLQuery

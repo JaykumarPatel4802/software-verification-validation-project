@@ -13,6 +13,9 @@ class SchemaHelper:
     def retrieve_all_schemas(self) -> str:
         import os
 
+        if self.all_schemas is not []:
+            return self.all_schemas
+
         schemas_directory = "database/schemas/"
         schemas = []
 
