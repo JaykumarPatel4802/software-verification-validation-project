@@ -3,6 +3,7 @@ from langchain.chat_models import init_chat_model
 from dotenv import load_dotenv
 from SchemaHelper import SchemaHelper
 from pydantic import BaseModel, Field
+import vertexai
 import json
 load_dotenv()
 
@@ -16,7 +17,7 @@ class Gemini_Text2SQL(AgenticFramework):
 
     def __init__(self, is_agentic=False):
         super().__init__()
-        self.llm = init_chat_model("gemini-2.0-flash", model_provider="google_vertexai")
+        self.llm = init_chat_model("gemini-1.5-flash", model_provider="google_vertexai")
         # self.llm = init_chat_model("google_vertexai:gemini-2.0-flash", temperature=0)
         self.sh = SchemaHelper()
         self.sh.store_schemas()
