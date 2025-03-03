@@ -6,7 +6,8 @@ from SQLiteHelper import SQLiteHelper
 # model = ChatGPT_Text2SQL()
 model = Gemini_Text2SQL()
 # model = Claude_Text2SQL()
-query = model.pipeline("How many distinct artists are there and how many distinct songs are there?")
+# query = model.pipeline("How many distinct artists are there and how many distinct songs are there?")
+query = model.pipeline("How many distinct artists are there?")
 
 print("Query:")
 print(query)
