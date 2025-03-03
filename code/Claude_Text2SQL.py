@@ -12,12 +12,11 @@ class RelevantTablesCount(BaseModel):
 class GeneratedSQLQuery(BaseModel):
     sql_query: str = Field(description="The generated SQL query")
 
-class Gemini_Text2SQL(AgenticFramework):
+class Claude_Text2SQL(AgenticFramework):
 
     def __init__(self, is_agentic=False):
         super().__init__()
-        self.llm = init_chat_model("gemini-2.0-flash", model_provider="google_vertexai")
-        # self.llm = init_chat_model("google_vertexai:gemini-2.0-flash", temperature=0)
+        self.llm = init_chat_model("claude-3-5-haiku-latest", model_provider="anthropic")
         self.sh = SchemaHelper()
         self.sh.store_schemas()
         self.is_agentic = is_agentic
