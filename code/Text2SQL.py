@@ -1,10 +1,16 @@
-from AgenticFramework import AgenticFramework
 from langchain.chat_models import init_chat_model
 from dotenv import load_dotenv
 from SchemaHelper import SchemaHelper
 from pydantic import BaseModel, Field
+import vertexai
 import json
+from enum import Enum
 load_dotenv()
+
+class Model(Enum):
+    ChatGPT = 1
+    Gemini = 2
+    Claude = 3
 
 class RelevantTablesCount(BaseModel):
     number_of_tables: int = Field(description="The count of the number of relevant tables in the database")
@@ -12,11 +18,17 @@ class RelevantTablesCount(BaseModel):
 class GeneratedSQLQuery(BaseModel):
     sql_query: str = Field(description="The generated SQL query")
 
-class Claude_Text2SQL(AgenticFramework):
+class Text2SQL():
 
-    def __init__(self, is_agentic=False):
-        super().__init__()
-        self.llm = init_chat_model("claude-3-5-haiku-latest", model_provider="anthropic")
+    def __init__(self, model: Model = Model.ChatGPT, is_agentic: bool = False):
+        if model == Model.ChatGPT:
+            self.llm = init_chat_model("gpt-4o-mini", model_provider="openai")
+        elif model == Model.Gemini:
+            self.llm = init_chat_model("gemini-1.5-flash", model_provider="google_vertexai")
+        elif model == Model.Claude:
+            self.llm = init_chat_model("claude-3-5-haiku-latest", model_provider="anthropic")
+        else:
+            self.llm = None
         self.sh = SchemaHelper()
         self.sh.store_schemas()
         self.is_agentic = is_agentic

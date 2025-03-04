@@ -1,11 +1,7 @@
-from ChatGPT_Text2SQL import ChatGPT_Text2SQL
-from Gemini_Text2SQL import Gemini_Text2SQL
-from Claude_Text2SQL import Claude_Text2SQL
+from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
 
-# model = ChatGPT_Text2SQL()
-model = Gemini_Text2SQL()
-# model = Claude_Text2SQL()
+model = Text2SQL(model=Model.Claude)
 # query = model.pipeline("How many distinct artists are there and how many distinct songs are there?")
 query = model.pipeline("How many distinct artists are there?")
 
