@@ -9,8 +9,14 @@ print("Query:")
 print(query)
 
 sqlite_helper = SQLiteHelper()
-executionResult = sqlite_helper.executeQuery(query=query)
-print(executionResult)
+executionResult, error = sqlite_helper.executeQuery(query=query)
+if error is None:
+    print(executionResult)
+else:
+    print(error)
 
-executionResult = sqlite_helper.executeQuery(query="SELECT COUNT(DISTINCT a.ArtistId) as DistinctArtists FROM Artist a;")
-print(executionResult)
+executionResult, error = sqlite_helper.executeQuery(query="SELECT COUNT(DISTINCT a.ArtistId) as DistinctArtists FROM Artist a;")
+if error is None:
+    print(executionResult)
+else:
+    print(error)
