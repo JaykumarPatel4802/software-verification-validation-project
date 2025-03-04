@@ -50,7 +50,7 @@ class ResultsHelper:
         except Exception as e:
             print("Failed to connect to database: ", e)
 
-    def loadQueriesAnswers(self):
+    def loadQuestionsAnswers(self):
         def getCreateTableQuery(is_agentic: bool):
             return f"""
                 INSERT INTO {'agentic' if is_agentic else 'agentless'} (query, answer) VALUES (?, ?);
@@ -72,4 +72,7 @@ class ResultsHelper:
 
     def setupDB(self):
         self.createDB()
-        self.loadQueriesAnswers()
+        self.loadQuestionsAnswers()
+
+rh = ResultsHelper()
+rh.setupDB()
