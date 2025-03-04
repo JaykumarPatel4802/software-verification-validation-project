@@ -1,8 +1,51 @@
 import sqlite3
 
-database = "results.db"
+results_database = "results.db"
+source_database = "database/Chinook_Sqlite.sqlite"
+
 QuestionsAnswers = {
-    "How many distinct artists are there?": "[(275,)]"
+    "How many distinct artists are there?": {
+        "SQL_Query": "SELECT COUNT(DISTINCT ArtistId) as DistinctArtists FROM Artist;",
+        "Answer": None
+    },
+    "What are the top 5 countries with the most Invoices?": {
+        "SQL_Query": """
+                        SELECT BillingCountry,
+                            COUNT(InvoiceId) as invoice_count
+                        FROM Invoice
+                        GROUP BY BillingCountry
+                        ORDER BY invoice_count DESC
+                        LIMIT 5
+                    """,
+        "Answer": None
+    },
+    "What is the first and last name of the customer who spent the most money (summed across all of their invoices), and what was the amount they spent?": {
+        "SQL_Query": """
+                        WITH CustomerSpending AS (
+                            SELECT
+                                i.CustomerId,
+                                SUM(i.Total) as total_spent
+                            FROM Invoice i
+                            GROUP BY i.CustomerId
+                        )
+                        SELECT c.FirstName, c.LastName, cs.total_spent
+                        FROM CustomerSpending cs
+                        JOIN Customer c on cs.CustomerId = c.CustomerId
+                        WHERE cs.total_spent = (SELECT MAX(total_spent) from CustomerSpending);
+                    """,
+        "Answer": None
+    },
+    "2 What is the first and last name of the customer who spent the most money (summed across all of their invoices), and what was the amount they spent?": {
+        "SQL_Query": """
+                        SELECT c.FirstName, c.LastName, SUM(i.Total) as TotalSpent
+                        From Invoice i
+                        JOIN Customer c ON i.CustomerId = c.CustomerId
+                        GROUP BY c.CustomerId, c.FirstName, c.LastName
+                        ORDER BY TotalSpent DESC
+                        LIMIT 1;
+                    """,
+        "Answer": None
+    }
 }
 
 class ResultsHelper:
@@ -45,12 +88,18 @@ class ResultsHelper:
             conn.commit()
 
         try:
-            with sqlite3.connect(database) as conn:
+            with sqlite3.connect(results_database) as conn:
                 createTables(conn)
         except Exception as e:
-            print("Failed to connect to database: ", e)
+            print("createDB - Failed to connect to database: ", e)
 
     def loadQuestionsAnswers(self):
+        def clearTables(conn):
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM agentic")
+            cursor.execute("DELETE FROM agentless")
+            conn.commit()
+
         def getCreateTableQuery(is_agentic: bool):
             return f"""
                 INSERT INTO {'agentic' if is_agentic else 'agentless'} (query, answer) VALUES (?, ?);
@@ -63,16 +112,36 @@ class ResultsHelper:
             conn.commit()
 
         try:
-            with sqlite3.connect(database) as conn:
+            with sqlite3.connect(results_database) as conn:
+                clearTables(conn)
                 for question in QuestionsAnswers:
-                    answer = QuestionsAnswers[question]
+                    answer = QuestionsAnswers[question]["Answer"]
                     addQuestionAnswer(conn, question, answer)
         except Exception as e:
-            print("Failed to connect to database: ", e)
+            print("loadQuestionsAnswers - Failed to connect to database: ", e)
+    
+    def determineQuestionsAnswers(self):
+
+        def executeQuery(conn, query):
+            cursor = conn.cursor()
+            cursor.execute(query)
+            rows = cursor.fetchall()
+            return rows
+
+        try:
+            with sqlite3.connect(source_database) as conn:
+                for question in QuestionsAnswers:
+                    query = QuestionsAnswers[question]["SQL_Query"]
+                    answer = executeQuery(conn, query)
+                    QuestionsAnswers[question]["Answer"] = str(answer)
+
+        except Exception as e:
+            print("determineQuestionsAnswers - Failed to connect to database: ", e)
 
     def setupDB(self):
         self.createDB()
         self.loadQuestionsAnswers()
 
 rh = ResultsHelper()
+rh.determineQuestionsAnswers()
 rh.setupDB()
