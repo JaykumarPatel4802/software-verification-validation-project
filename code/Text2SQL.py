@@ -7,12 +7,6 @@ import json
 from enum import Enum
 load_dotenv()
 
-# class Model(Enum):
-#     ChatGPT = 1
-#     Gemini = 2
-#     Claude = 3
-#     Llama = 4
-
 class Model(Enum):
     Llama = 1
     ChatGPT = 2

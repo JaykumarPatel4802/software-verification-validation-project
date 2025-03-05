@@ -116,7 +116,3 @@ class ResultsHelper:
     def setupDB(self):
         self.createDB()
         self.loadQuestionsAnswers()
-
-rh = ResultsHelper()
-rh.determineQuestionsAnswers()
-rh.setupDB()

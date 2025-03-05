@@ -1,5 +1,6 @@
 from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
+from ResultsHelper import ResultsHelper
 import sqlite3
 
 def execute(q, sqlite_helper, model):
@@ -44,18 +45,25 @@ def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
     except Exception as e:
         print("run_benchmark - Failed to connect to database: ", e)
 
+print("Resetting and Setting Up Results DB")
+rh = ResultsHelper()
+rh.determineQuestionsAnswers()
+rh.setupDB()
+
 print("Running Agentless")
 for m in Model:
-    if m == Model.Llama or m == Model.ChatGPT:
-        print("Running Model: ", m)
-        sqlite_helper = SQLiteHelper()
-        for i in range(3):
-            run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
+    if m != Model.DeepSeek:
+        if True:
+            print("Running Model: ", m)
+            sqlite_helper = SQLiteHelper()
+            for i in range(3):
+                run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
 
 print("Running Agentic")
 for m in Model:
-    if m == Model.Llama or m == Model.ChatGPT:
-        print("Running Model: ", m)
-        sqlite_helper = SQLiteHelper()
-        for i in range(3):
-            run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)
+    if m != Model.DeepSeek:
+        if True:
+            print("Running Model: ", m)
+            sqlite_helper = SQLiteHelper()
+            for i in range(3):
+                run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)
