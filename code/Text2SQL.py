@@ -52,7 +52,7 @@ class Text2SQL():
         Determine the number of tables in the database that are relevant to the query. If you aren't sure, provide your best guess.
         """
         structured_llm = self.llm.with_structured_output(RelevantTablesCount)
-        # structured_llm = self.llm.with_structured_output(RelevantTablesCount, method="json_mode")
+        # structured_llm = self.llm.with_structured_output(RelevantTablesCount, method="json_mode") # https://python.langchain.com/v0.1/docs/modules/model_io/chat/structured_output/
         response = structured_llm.invoke(prompt)
         return response.number_of_tables
 
