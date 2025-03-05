@@ -81,7 +81,7 @@ class Text2SQL():
         The query is: {query}
         The relevant schemas are: {relevant_schemas}
 
-        Determine the SQL query that can answer the natural language query.
+        Determine the SQL query that can answer the natural language query. Only generate one SQL query.
         """
         structured_llm = self.llm.with_structured_output(GeneratedSQLQuery)
         response = structured_llm.invoke(prompt)

@@ -29,32 +29,20 @@ def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
     else:
         return
     
-    # try:
-    #     with sqlite3.connect("results.db") as conn:
-    #         cursor = conn.cursor()
-    #         cursor.execute(f"SELECT * FROM {table_name}")
-    #         rows = cursor.fetchall()
-    #         model = Text2SQL(model=m, is_agentic=is_agentic)
-    #         for row in rows:
-    #             id = row[0]
-    #             question = row[1]
-    #             sql_query, result = execute(question, sqlite_helper, model)
-    #             cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
-    #             conn.commit() 
-    # except Exception as e:
-    #     print("run_benchmark - Failed to connect to database: ", e)
-
-    with sqlite3.connect("results.db") as conn:
-        cursor = conn.cursor()
-        cursor.execute(f"SELECT * FROM {table_name}")
-        rows = cursor.fetchall()
-        model = Text2SQL(model=m, is_agentic=is_agentic)
-        for row in rows:
-            id = row[0]
-            question = row[1]
-            sql_query, result = execute(question, sqlite_helper, model)
-            cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
-            conn.commit() 
+    try:
+        with sqlite3.connect("results.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute(f"SELECT * FROM {table_name}")
+            rows = cursor.fetchall()
+            model = Text2SQL(model=m, is_agentic=is_agentic)
+            for row in rows:
+                id = row[0]
+                question = row[1]
+                sql_query, result = execute(question, sqlite_helper, model)
+                cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
+                conn.commit() 
+    except Exception as e:
+        print("run_benchmark - Failed to connect to database: ", e)
 
 print("Running Agentless")
 for m in Model:
