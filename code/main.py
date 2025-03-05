@@ -25,6 +25,8 @@ def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
         query_column, answer_column = f"Claude_query{iteration}", f"Claude_result{iteration}"
     elif m == Model.Llama:
         query_column, answer_column = f"Llama_query{iteration}", f"Llama_result{iteration}"
+    elif m == Model.DeepSeek:
+        query_column, answer_column = f"DeepSeek_query{iteration}", f"DeepSeek_result{iteration}"
     else:
         return
     

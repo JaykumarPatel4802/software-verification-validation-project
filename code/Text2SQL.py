@@ -40,7 +40,7 @@ class Text2SQL():
             # self.llm = init_chat_model("llama3.2:1b", model_provider="ollama")
             self.llm = init_chat_model("llama3.1:8b", model_provider="ollama")
         elif model == Model.DeepSeek:
-            self.llm = init_chat_model("llama3.1:8b", model_provider="ollama")
+            self.llm = init_chat_model("MFDoom/deepseek-r1-tool-calling:14b", model_provider="ollama")
         else:
             self.llm = None
         self.sh = SchemaHelper()
