@@ -18,6 +18,7 @@ class Model(Enum):
     ChatGPT = 2
     Gemini = 3
     Claude = 4
+    DeepSeek = 5
 
 class RelevantTablesCount(BaseModel):
     number_of_tables: int = Field(description="The count of the number of relevant tables in the database")
@@ -37,6 +38,8 @@ class Text2SQL():
         elif model == Model.Llama:
             # self.llm = init_chat_model("llama3-8b-8192", model_provider="groq")
             # self.llm = init_chat_model("llama3.2:1b", model_provider="ollama")
+            self.llm = init_chat_model("llama3.1:8b", model_provider="ollama")
+        elif model == Model.DeepSeek:
             self.llm = init_chat_model("llama3.1:8b", model_provider="ollama")
         else:
             self.llm = None

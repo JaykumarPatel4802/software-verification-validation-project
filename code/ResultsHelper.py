@@ -39,7 +39,13 @@ class ResultsHelper:
                     Llama_query3 text,
                     Llama_result1 text,
                     Llama_result2 text,
-                    Llama_result3 text
+                    Llama_result3 text,
+                    DeepSeek_query1 text,
+                    DeepSeek_query2 text,
+                    DeepSeek_query3 text,
+                    DeepSeek_result1 text,
+                    DeepSeek_result2 text,
+                    DeepSeek_result3 text
                 );
                 """
         
