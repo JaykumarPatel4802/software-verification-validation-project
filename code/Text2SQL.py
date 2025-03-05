@@ -82,19 +82,18 @@ class Text2SQL():
         structured_llm = self.llm.with_structured_output(GeneratedSQLQuery)
         response = structured_llm.invoke(prompt)
         return response.sql_query
-    
-    # Create agent to execute the SQL query and retrieve the result
-    def save_sql_query(self, query: str, sql_query: str) -> str:
-        pass
 
     def pipeline(self, query: str) -> str:
-        if self.is_agentic:
-            numRelevantTables = self.retrieve_number_of_tables(query)
-            retrievedSchemas = self.retrieve_relevant_schemas(query, numRelevantTables)
-            generatedSQLQuery = self.generate_sql_query(query, retrievedSchemas)
-        else:
-            allSchemas = self.retrieve_all_schemas()
-            generatedSQLQuery = self.generate_sql_query(query, allSchemas)
+        try:
+            if self.is_agentic:
+                numRelevantTables = self.retrieve_number_of_tables(query)
+                retrievedSchemas = self.retrieve_relevant_schemas(query, numRelevantTables)
+                generatedSQLQuery = self.generate_sql_query(query, retrievedSchemas)
+            else:
+                allSchemas = self.retrieve_all_schemas()
+                generatedSQLQuery = self.generate_sql_query(query, allSchemas)
         
-        self.save_sql_query(query, generatedSQLQuery)
-        return generatedSQLQuery
+            return generatedSQLQuery
+        except:
+            print("Error running pipeline")
+            return None

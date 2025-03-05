@@ -33,9 +33,21 @@ class ResultsHelper:
                     Claude_query3 text,
                     Claude_result1 text,
                     Claude_result2 text,
-                    Claude_result3 text
+                    Claude_result3 text,
+                    Llama_query1 text,
+                    Llama_query2 text,
+                    Llama_query3 text,
+                    Llama_result1 text,
+                    Llama_result2 text,
+                    Llama_result3 text
                 );
                 """
+        
+        def deleteTables(conn):
+            cursor = conn.cursor()
+            cursor.execute("DROP TABLE IF EXISTS agentic;")
+            cursor.execute("DROP TABLE IF EXISTS agentless;")
+            conn.commit()
 
         def createTables(conn):
             cursor = conn.cursor()
@@ -45,6 +57,7 @@ class ResultsHelper:
 
         try:
             with sqlite3.connect(results_database) as conn:
+                deleteTables(conn)
                 createTables(conn)
         except Exception as e:
             print("createDB - Failed to connect to database: ", e)

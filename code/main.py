@@ -1,29 +1,53 @@
 from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
+import sqlite3
 
-def execute(m, q):
+def execute(m, q, sqlite_helper):
     model = Text2SQL(model=m)
     sql_query = model.pipeline(q)
-    sqlite_helper = SQLiteHelper()
-    executionResult, error = sqlite_helper.executeQuery(query=sql_query)
-    if error is None:
-        print(executionResult)
+    if sql_query != None:
+        executionResult, error = sqlite_helper.executeQuery(query=sql_query)
     else:
-        print(error)
+        sql_query, error = "N/A", "Error Generating Query" 
+    if error is None:
+        return sql_query, str(executionResult)
+    else:
+        return sql_query, error
 
-queries = [
-    "How many artists and customers are there?",
-    "What are the top 5 countries with the most Invoices?",
-    "What is the first and last name of the customer who spent the most money, and what was the amount they spent?",
-    "Who is the biggest fan for each artist? In order words, for each artist, which customer bought most of their tracks?"
-]
-
-# queries = [
-#     "How many artists and customers are there?",
-#     "What are the top 5 countries with the most Invoices?"
-# ]
+def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
+    table_name = 'agentic' if is_agentic else 'agentless'
+    query_column, answer_column = None, None
+    if m == Model.ChatGPT:
+        query_column, answer_column = f"ChatGPT_query{iteration}", f"ChatGPT_result{iteration}"
+    elif m == Model.Gemini:
+        query_column, answer_column = f"Gemini_query{iteration}", f"Gemini_result{iteration}"
+    elif m == Model.Claude:
+        query_column, answer_column = f"Claude_query{iteration}", f"Claude_result{iteration}"
+    elif m == Model.Llama:
+        query_column, answer_column = f"Llama_query{iteration}", f"Llama_result{iteration}"
+    else:
+        return
+    
+    try:
+        with sqlite3.connect("results.db") as conn:
+            cursor = conn.cursor()
+            cursor.execute(f"SELECT * FROM {table_name}")
+            rows = cursor.fetchall()
+            for row in rows:
+                id = row[0]
+                question = row[1]
+                sql_query, result = execute(m, question, sqlite_helper)
+                cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
+                conn.commit() 
+    except Exception as e:
+        print("run_benchmark - Failed to connect to database: ", e)
 
 for m in Model:
-    print(m)
-    for q in queries:
-        execute(m, q)
+    sqlite_helper = SQLiteHelper()
+    for i in range(3):
+        run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
+
+for m in Model:
+    sqlite_helper = SQLiteHelper()
+    for i in range(3):
+        run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)
