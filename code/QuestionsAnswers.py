@@ -1,6 +1,10 @@
 QuestionsAnswers = {
-    "How many distinct artists are there?": {
-        "SQL_Query": "SELECT COUNT(DISTINCT ArtistId) as DistinctArtists FROM Artist;",
+    "How many artists and customers are there?": {
+        "SQL_Query": """
+                        SELECT
+                            (SELECT COUNT(DISTINCT ArtistId) FROM Artist) as ArtistCount,
+                            (SELECT COUNT(DISTINCT CustomerId) FROM Customer) as CustomerCount;
+                    """,
         "Answer": None
     },
     "What are the top 5 countries with the most Invoices?": {
@@ -38,6 +42,38 @@ QuestionsAnswers = {
                         GROUP BY c.CustomerId, c.FirstName, c.LastName
                         ORDER BY TotalSpent DESC
                         LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "Who is the biggest fan for each artist? In order words, for each artist, which customer bought most of their tracks?": {
+        "SQL_Query": """
+                        WITH TrackPurchaseCount AS (
+                            SELECT 
+                                a.ArtistId,
+                                i.CustomerId,
+                                COUNT(il.TrackId) AS TrackPurchaseCount
+                            FROM InvoiceLine il
+                            JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+                            JOIN Track t ON il.TrackId = t.TrackId
+                            JOIN Album al ON t.AlbumId = al.AlbumId
+                            JOIN Artist a ON al.ArtistId = a.ArtistId
+                            GROUP BY a.ArtistId, i.CustomerId
+                        ),
+                        RankedFans AS (
+                            SELECT 
+                                tpc.ArtistId,
+                                tpc.CustomerId,
+                                tpc.TrackPurchaseCount,
+                                RANK() OVER (PARTITION BY tpc.ArtistId ORDER BY tpc.TrackPurchaseCount DESC) AS rnk
+                            FROM TrackPurchaseCount tpc
+                        )
+                        SELECT 
+                            a.Name AS ArtistName,
+                            r.CustomerId AS BiggestFanCustomerId,
+                            r.TrackPurchaseCount AS TracksPurchased
+                        FROM RankedFans r
+                        JOIN Artist a ON r.ArtistId = a.ArtistId
+                        WHERE r.rnk = 1;
                     """,
         "Answer": None
     }

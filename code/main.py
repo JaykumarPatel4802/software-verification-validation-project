@@ -1,22 +1,29 @@
 from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
 
-model = Text2SQL(model=Model.Claude)
-query = model.pipeline("How many distinct artists are there and how many distinct songs are there?")
-# query = model.pipeline("How many distinct artists are there?")
+def execute(m, q):
+    model = Text2SQL(model=m)
+    sql_query = model.pipeline(q)
+    sqlite_helper = SQLiteHelper()
+    executionResult, error = sqlite_helper.executeQuery(query=sql_query)
+    if error is None:
+        print(executionResult)
+    else:
+        print(error)
 
-print("Query:")
-print(query)
+queries = [
+    "How many artists and customers are there?",
+    "What are the top 5 countries with the most Invoices?",
+    "What is the first and last name of the customer who spent the most money, and what was the amount they spent?",
+    "Who is the biggest fan for each artist? In order words, for each artist, which customer bought most of their tracks?"
+]
 
-sqlite_helper = SQLiteHelper()
-executionResult, error = sqlite_helper.executeQuery(query=query)
-if error is None:
-    print(executionResult)
-else:
-    print(error)
+# queries = [
+#     "How many artists and customers are there?",
+#     "What are the top 5 countries with the most Invoices?"
+# ]
 
-executionResult, error = sqlite_helper.executeQuery(query="SELECT COUNT(DISTINCT a.ArtistId) as DistinctArtists FROM Artist a;")
-if error is None:
-    print(executionResult)
-else:
-    print(error)
+for m in Model:
+    print(m)
+    for q in queries:
+        execute(m, q)
