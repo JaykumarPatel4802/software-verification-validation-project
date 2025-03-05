@@ -49,7 +49,7 @@ class Text2SQL():
         The query is: {query}
         The schemas of the tables in the database are: {allSchemas}
 
-        Determine the number of tables in the database that are relevant to the query.
+        Determine the number of tables in the database that are relevant to the query. If you aren't sure, provide your best guess.
         """
         structured_llm = self.llm.with_structured_output(RelevantTablesCount)
         # structured_llm = self.llm.with_structured_output(RelevantTablesCount, method="json_mode")
@@ -76,7 +76,7 @@ class Text2SQL():
         The query is: {query}
         The relevant schemas are: {relevant_schemas}
 
-        Determine the SQL query that can answer the natural language query. Only generate one SQL query.
+        Determine the SQL query that can answer the natural language query. Only generate one SQL query. If you aren't sure, provide your best guess.
         """
         structured_llm = self.llm.with_structured_output(GeneratedSQLQuery)
         response = structured_llm.invoke(prompt)
