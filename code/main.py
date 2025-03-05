@@ -14,7 +14,7 @@ def execute(q, sqlite_helper, model):
     else:
         return sql_query, error
 
-def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
+def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
     table_name = 'agentic' if is_agentic else 'agentless'
     query_column, answer_column = None, None
     if m == Model.ChatGPT:
@@ -35,7 +35,6 @@ def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM {table_name}")
             rows = cursor.fetchall()
-            model = Text2SQL(model=m, is_agentic=is_agentic)
             for row in rows:
                 id = row[0]
                 question = row[1]
@@ -52,18 +51,18 @@ rh.setupDB()
 
 print("Running Agentless")
 for m in Model:
-    if m != Model.DeepSeek:
-        if True:
-            print("Running Model: ", m)
-            sqlite_helper = SQLiteHelper()
-            for i in range(3):
-                run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
+    if m not in [Model.DeepSeek, Model.Gemini]:
+        model = Text2SQL(model=m, is_agentic=False)
+        print("Running Model: ", m)
+        sqlite_helper = SQLiteHelper()
+        for i in range(3):
+            run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=False)
 
 print("Running Agentic")
 for m in Model:
-    if m != Model.DeepSeek:
-        if True:
-            print("Running Model: ", m)
-            sqlite_helper = SQLiteHelper()
-            for i in range(3):
-                run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)
+    if m not in [Model.DeepSeek, Model.Gemini]:
+        model = Text2SQL(model=m, is_agentic=True)
+        print("Running Model: ", m)
+        sqlite_helper = SQLiteHelper()
+        for i in range(3):
+            run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=True)
