@@ -52,6 +52,7 @@ class Text2SQL():
         Determine the number of tables in the database that are relevant to the query.
         """
         structured_llm = self.llm.with_structured_output(RelevantTablesCount)
+        # structured_llm = self.llm.with_structured_output(RelevantTablesCount, method="json_mode")
         response = structured_llm.invoke(prompt)
         return response.number_of_tables
 
@@ -82,39 +83,15 @@ class Text2SQL():
         return response.sql_query
 
     def pipeline(self, query: str) -> str:
-        # try:
-        #     if self.is_agentic:
-        #         numRelevantTables = self.retrieve_number_of_tables(query)
-        #         retrievedSchemas = self.retrieve_relevant_schemas(query, numRelevantTables)
-        #         generatedSQLQuery = self.generate_sql_query(query, retrievedSchemas)
-        #     else:
-        #         allSchemas = self.retrieve_all_schemas()
-        #         generatedSQLQuery = self.generate_sql_query(query, allSchemas)
+        try:
+            if self.is_agentic:
+                numRelevantTables = self.retrieve_number_of_tables(query)
+                retrievedSchemas = self.retrieve_relevant_schemas(query, numRelevantTables)
+                generatedSQLQuery = self.generate_sql_query(query, retrievedSchemas)
+            else:
+                allSchemas = self.retrieve_all_schemas()
+                generatedSQLQuery = self.generate_sql_query(query, allSchemas)
         
-        #     return generatedSQLQuery
-        # except Exception as e:
-        #     print("----------")
-        #     print("----------")
-        #     print("Error running pipeline")
-        #     print("-----")
-        #     print(Exception)
-        #     print("-----")
-        #     print(e)
-        #     print("----------")
-        #     print("----------")
-        #     return None
-
-        if self.is_agentic:
-            print("----------")
-            numRelevantTables = self.retrieve_number_of_tables(query)
-            print(f"numRelevantTables: {numRelevantTables}")
-            retrievedSchemas = self.retrieve_relevant_schemas(query, numRelevantTables)
-            print(f"retrievedSchemas: {retrievedSchemas[:10]}")
-            generatedSQLQuery = self.generate_sql_query(query, retrievedSchemas)
-            print(f"generatedSQLQuery: {generatedSQLQuery[:10]}")
-            print("----------")
-        else:
-            allSchemas = self.retrieve_all_schemas()
-            generatedSQLQuery = self.generate_sql_query(query, allSchemas)
-    
-        return generatedSQLQuery
+            return generatedSQLQuery, None
+        except Exception as e:
+            return None, str(e)

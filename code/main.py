@@ -4,15 +4,16 @@ from ResultsHelper import ResultsHelper
 import sqlite3
 
 def execute(q, sqlite_helper, model):
-    sql_query = model.pipeline(q)
-    if sql_query != None:
-        executionResult, error = sqlite_helper.executeQuery(query=sql_query)
+    sql_query, pipeline_error = model.pipeline(q)
+    if pipeline_error is None:
+        executionResult, executeQuery_error = sqlite_helper.executeQuery(query=sql_query)
+        if executeQuery_error is None:
+            return sql_query, str(executionResult)
+        else:
+            return sql_query, f"Error Executing Query - {executeQuery_error}"
     else:
-        sql_query, error = "N/A", "Error Generating Query" 
-    if error is None:
-        return sql_query, str(executionResult)
-    else:
-        return sql_query, error
+        sql_query, pipeline_error_annotated = "N/A", f"Error Generating Query - {pipeline_error}" 
+        return sql_query, pipeline_error_annotated
 
 def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
     table_name = 'agentic' if is_agentic else 'agentless'
@@ -51,7 +52,7 @@ rh.setupDB()
 
 print("Running Agentless")
 for m in Model:
-    if m not in [Model.DeepSeek, Model.Gemini]:
+    if m not in [Model.DeepSeek, Model.Llama]:
         model = Text2SQL(model=m, is_agentic=False)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
@@ -60,9 +61,11 @@ for m in Model:
 
 print("Running Agentic")
 for m in Model:
-    if m not in [Model.DeepSeek, Model.Gemini]:
+    if m not in [Model.DeepSeek, Model.Llama]:
         model = Text2SQL(model=m, is_agentic=True)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
         for i in range(3):
+            print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=True)
+    print()
