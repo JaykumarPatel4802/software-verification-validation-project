@@ -42,12 +42,16 @@ def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
     except Exception as e:
         print("run_benchmark - Failed to connect to database: ", e)
 
+print("Running Agentless")
 for m in Model:
+    print("Running Model: ", m)
     sqlite_helper = SQLiteHelper()
     for i in range(3):
         run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
 
+print("Running Agentic")
 for m in Model:
+    print("Running Model: ", m)
     sqlite_helper = SQLiteHelper()
     for i in range(3):
         run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)

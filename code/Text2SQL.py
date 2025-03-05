@@ -36,7 +36,8 @@ class Text2SQL():
             self.llm = init_chat_model("claude-3-haiku-20240307", model_provider="anthropic")
         elif model == Model.Llama:
             # self.llm = init_chat_model("llama3-8b-8192", model_provider="groq")
-            self.llm = init_chat_model("llama3.2:1b", model_provider="ollama")
+            # self.llm = init_chat_model("llama3.2:1b", model_provider="ollama")
+            self.llm = init_chat_model("llama3.1:8b", model_provider="ollama")
         else:
             self.llm = None
         self.sh = SchemaHelper()
