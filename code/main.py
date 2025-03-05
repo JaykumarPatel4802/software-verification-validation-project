@@ -2,8 +2,7 @@ from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
 import sqlite3
 
-def execute(m, q, sqlite_helper):
-    model = Text2SQL(model=m)
+def execute(q, sqlite_helper, model):
     sql_query = model.pipeline(q)
     if sql_query != None:
         executionResult, error = sqlite_helper.executeQuery(query=sql_query)
@@ -30,30 +29,45 @@ def run_benchmark(m, sqlite_helper, iteration, is_agentic = False):
     else:
         return
     
-    try:
-        with sqlite3.connect("results.db") as conn:
-            cursor = conn.cursor()
-            cursor.execute(f"SELECT * FROM {table_name}")
-            rows = cursor.fetchall()
-            for row in rows:
-                id = row[0]
-                question = row[1]
-                sql_query, result = execute(m, question, sqlite_helper)
-                cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
-                conn.commit() 
-    except Exception as e:
-        print("run_benchmark - Failed to connect to database: ", e)
+    # try:
+    #     with sqlite3.connect("results.db") as conn:
+    #         cursor = conn.cursor()
+    #         cursor.execute(f"SELECT * FROM {table_name}")
+    #         rows = cursor.fetchall()
+    #         model = Text2SQL(model=m, is_agentic=is_agentic)
+    #         for row in rows:
+    #             id = row[0]
+    #             question = row[1]
+    #             sql_query, result = execute(question, sqlite_helper, model)
+    #             cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
+    #             conn.commit() 
+    # except Exception as e:
+    #     print("run_benchmark - Failed to connect to database: ", e)
+
+    with sqlite3.connect("results.db") as conn:
+        cursor = conn.cursor()
+        cursor.execute(f"SELECT * FROM {table_name}")
+        rows = cursor.fetchall()
+        model = Text2SQL(model=m, is_agentic=is_agentic)
+        for row in rows:
+            id = row[0]
+            question = row[1]
+            sql_query, result = execute(question, sqlite_helper, model)
+            cursor.execute(f"UPDATE {table_name} SET {query_column} = ?, {answer_column} = ? WHERE id = ?", (sql_query, result, id))
+            conn.commit() 
 
 print("Running Agentless")
 for m in Model:
-    print("Running Model: ", m)
-    sqlite_helper = SQLiteHelper()
-    for i in range(3):
-        run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
+    if m == Model.Llama or m == Model.ChatGPT:
+        print("Running Model: ", m)
+        sqlite_helper = SQLiteHelper()
+        for i in range(3):
+            run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=False)
 
 print("Running Agentic")
 for m in Model:
-    print("Running Model: ", m)
-    sqlite_helper = SQLiteHelper()
-    for i in range(3):
-        run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)
+    if m == Model.Llama or m == Model.ChatGPT:
+        print("Running Model: ", m)
+        sqlite_helper = SQLiteHelper()
+        for i in range(3):
+            run_benchmark(m, sqlite_helper, iteration = i + 1, is_agentic=True)
