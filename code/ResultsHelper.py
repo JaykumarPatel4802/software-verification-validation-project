@@ -7,7 +7,7 @@ source_database = "database/Chinook_Sqlite.sqlite"
 class ResultsHelper:
 
     def __init__(self, is_agentic: bool = False):
-        self.is_agentic = is_agentic;
+        self.is_agentic = is_agentic
 
     def createDB(self):
         def getCreateTableQuery(is_agentic: bool):

@@ -1,0 +1,7 @@
+run_benchmark - Failed to connect to database:  'NoneType' object has no attribute 'sql_query'
+- When the model does not return a Query
+- How this error is handled in main.py:
+    if sql_query != None:
+        executionResult, error = sqlite_helper.executeQuery(query=sql_query)
+    else:
+        sql_query, error = "N/A", "Error Generating Query" 
