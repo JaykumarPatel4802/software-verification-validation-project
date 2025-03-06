@@ -14,13 +14,8 @@ class Model(Enum):
     Claude = 4
     DeepSeek = 5
 
-class RelevantTablesCount(BaseModel):
-    number_of_tables: int = Field(description="The count of the number of relevant tables in the database")
 
-class GeneratedSQLQuery(BaseModel):
-    sql_query: str = Field(description="The generated SQL query")
-
-class Text2SQL():
+class Text2SQL_JSON():
 
     def __init__(self, model: Model = Model.ChatGPT, is_agentic: bool = False):
         if model == Model.ChatGPT:
@@ -49,13 +44,25 @@ class Text2SQL():
         The query is: {query}
         The schemas of the tables in the database are: {allSchemas}
 
-        Determine the number of tables in the database that are relevant to the query. If you aren't sure, provide your best guess.
+        Determine the number of tables in the database that are relevant to the query. If you aren't sure, provide your best guess. Ensure that the output is an INTEGER.
         """
 
-        structured_llm = self.llm.with_structured_output(RelevantTablesCount)
-        # structured_llm = self.llm.with_structured_output(RelevantTablesCount, method="json_mode") # https://python.langchain.com/v0.1/docs/modules/model_io/chat/structured_output/
+        json_schema = {
+            "title": "RelevantTablesCount",
+            "description": "The count of the number of relevant tables in the database",
+            "type": "object",
+            "properties": {
+                "number_of_tables": {
+                    "type": "integer",
+                    "description": "The count of the number of relevant tables in the database",
+                },
+            },
+            "required": ["number_of_tables"],
+        }
+
+        structured_llm = self.llm.with_structured_output(json_schema)
         response = structured_llm.invoke(prompt)
-        return int(response.number_of_tables)
+        return int(response['number_of_tables'])
 
 
     # Create agent to retrieve the relevant schemas of the tables
@@ -79,9 +86,23 @@ class Text2SQL():
 
         Determine the SQL query that can answer the natural language query. Only generate one SQL query. If you aren't sure, provide your best guess.
         """
-        structured_llm = self.llm.with_structured_output(GeneratedSQLQuery)
+
+        json_schema = {
+            "title": "GeneratedSQLQuery",
+            "description": "The generated SQL query",
+            "type": "object",
+            "properties": {
+                "sql_query": {
+                    "type": "string",
+                    "description": "The generated SQL query",
+                },
+            },
+            "required": ["sql_query"],
+        }
+
+        structured_llm = self.llm.with_structured_output(json_schema)
         response = structured_llm.invoke(prompt)
-        return response.sql_query
+        return response['sql_query']
 
     def pipeline(self, query: str) -> str:
         try:
