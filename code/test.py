@@ -20,4 +20,4 @@ print(response8.sql_query)
 
 s_deepseek = deepseek.with_structured_output(GeneratedSQLQuery)
 response_d = s_deepseek.invoke(prompt)
-print(response_d.sql_query)   
+print(response_d.sql_query)
