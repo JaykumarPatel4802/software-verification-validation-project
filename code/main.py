@@ -52,7 +52,7 @@ rh.setupDB()
 
 print("Running Agentless")
 for m in Model:
-    if m not in [Model.DeepSeek, Model.Llama]:
+    if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
         model = Text2SQL(model=m, is_agentic=False)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
@@ -61,7 +61,7 @@ for m in Model:
 
 print("Running Agentic")
 for m in Model:
-    if m not in [Model.DeepSeek, Model.Llama]:
+    if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
         model = Text2SQL(model=m, is_agentic=True)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
