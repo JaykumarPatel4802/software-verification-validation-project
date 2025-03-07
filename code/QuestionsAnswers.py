@@ -144,5 +144,105 @@ QuestionsAnswers = {
                       WHERE Rank <= 3;
                     """,
         "Answer": None
-    }
+    },
+    # Quary type: complex
+    "Which artist has the most number of songs per album, and how many songs does he have per album?": {
+        "SQL_Query": """
+                      SELECT 
+                        a.ArtistId, ar.Name, 
+                        COUNT(t.TrackId) AS SongsPerAlbum
+                      FROM Album a
+                      JOIN Artist ar ON a.ArtistId = ar.ArtistId
+                      JOIN Track t ON a.AlbumId = t.AlbumId
+                      GROUP BY a.AlbumId, ar.ArtistId, ar.Name
+                      ORDER BY SongsPerAlbum DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    # Quary type: complex
+    # ChatGPT got this right on the first try but the second and third is not executable
+    "Which three countries spend the most money on pop music? How much do they spend, respectively?": {
+        "SQL_Query": """
+                      SELECT c.Country, SUM(il.UnitPrice * il.Quantity) AS TotalSpent
+                      FROM InvoiceLine il
+                      JOIN Track t ON il.TrackId = t.TrackId
+                      JOIN Album a ON t.AlbumId = a.AlbumId
+                      JOIN Artist ar ON a.ArtistId = ar.ArtistId
+                      JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+                      JOIN Customer c ON i.CustomerId = c.CustomerId
+                      WHERE t.GenreId = (SELECT GenreId FROM Genre WHERE Name = 'Pop')
+                      GROUP BY c.Country
+                      ORDER BY TotalSpent DESC
+                      LIMIT 3;
+                    """,
+        "Answer": None
+    },
+    # Quary type: complex
+    # No correct answer from ChatGPT. First two tries are not executable
+    # Third one doesn't calculate the average sales for the month across all years
+    "Which month, when averaging sales from 2009 to 2013, had the highest sales in dollars? How much higher is the average sales for this month compared to the overall average across all months during this period? Please round the result to two decimal places.": {
+        "SQL_Query": """
+                WITH MonthlySales AS (
+                    SELECT 
+                        strftime('%m', InvoiceDate) AS Month,  -- Extracts the month (01-12) without the year
+                        SUM(Total) AS SalesTotal
+                    FROM 
+                        Invoice
+                    WHERE 
+                        strftime('%Y', InvoiceDate) BETWEEN '2009' AND '2013'
+                    GROUP BY 
+                        Month, strftime('%Y', InvoiceDate) -- Group by both year and month to get sales per month per year
+                ),
+                AverageMonthlySales AS (
+                    SELECT 
+                        Month,
+                        AVG(SalesTotal) AS AverageSales  -- Computes the average sales for each month across all years
+                    FROM 
+                        MonthlySales
+                    GROUP BY 
+                        Month
+                ),
+                OverallAverage AS (
+                    SELECT 
+                        AVG(AverageSales) AS OverallAverageSales  -- Computes the overall average across all months
+                    FROM 
+                        AverageMonthlySales
+                )
+                SELECT 
+                    AMS.Month,
+                    ROUND(AMS.AverageSales, 2) AS HighestAverageSales,
+                    ROUND(AMS.AverageSales - OA.OverallAverageSales, 2) AS DifferenceFromOverall
+                FROM 
+                    AverageMonthlySales AMS,
+                    OverallAverage OA
+                WHERE 
+                    AMS.AverageSales = (SELECT MAX(AverageSales) FROM AverageMonthlySales);
+                    """,
+        "Answer": None
+    },
+    # Quary type: complex
+    # No correct answer from ChatGPT. Third try are not executable
+    # First two doesn't calculate how long it would take to download the playlist
+    "Which playlist has the largest total size in bytes? If my internet speed is 100 MB/s, how long would it take to download that playlist?": {
+        "SQL_Query": """
+                      SELECT 
+                          p.Name, 
+                          SUM(t.Bytes) AS TotalSizeBytes,
+                          ROUND(SUM(t.Bytes) / (100 * 1024 * 1024), 2) AS DownloadTimeSeconds
+                      FROM 
+                          Playlist p
+                      JOIN 
+                          PlaylistTrack pt ON p.PlaylistId = pt.PlaylistId
+                      JOIN 
+                          Track t ON pt.TrackId = t.TrackId
+                      GROUP BY 
+                          p.PlaylistId, p.Name
+                      ORDER BY 
+                          TotalSizeBytes DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    
 }
