@@ -125,7 +125,7 @@ QuestionsAnswers = {
         "Answer": None
     },
     # Quary type: window aggregate (GROUP BY + ARRANGE + SLICE)
-    # ChatGPT got this right on the third try
+    # ChatGPT got 1/3 tries correct
     "What are the top three longest songs' name for each media_type?": {
         "SQL_Query": """
                       WITH RankedSongs AS (
@@ -161,7 +161,7 @@ QuestionsAnswers = {
         "Answer": None
     },
     # Quary type: complex
-    # ChatGPT got this right on the first try but the second and third is not executable
+    # ChatGPT got 1/3 tries correct
     "Which three countries spend the most money on pop music? How much do they spend, respectively?": {
         "SQL_Query": """
                       SELECT c.Country, SUM(il.UnitPrice * il.Quantity) AS TotalSpent
@@ -179,8 +179,7 @@ QuestionsAnswers = {
         "Answer": None
     },
     # Quary type: complex
-    # No correct answer from ChatGPT. First two tries are not executable
-    # Third one doesn't calculate the average sales for the month across all years
+    # No correct answer from ChatGPT. Written manually.
     "Which month, when averaging sales from 2009 to 2013, had the highest sales in dollars? How much higher is the average sales for this month compared to the overall average across all months during this period? Please round the result to two decimal places.": {
         "SQL_Query": """
                 WITH MonthlySales AS (
@@ -222,8 +221,7 @@ QuestionsAnswers = {
         "Answer": None
     },
     # Quary type: complex
-    # No correct answer from ChatGPT. Third try are not executable
-    # First two doesn't calculate how long it would take to download the playlist
+    # No correct answer from ChatGPT. Written manually.
     "Which playlist has the largest total size in bytes? If my internet speed is 100 MB/s, how long would it take to download that playlist?": {
         "SQL_Query": """
                       SELECT 
