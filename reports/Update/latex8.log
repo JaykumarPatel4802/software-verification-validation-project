@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.26)  9 MAR 2025 15:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.26)  9 MAR 2025 16:24
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -322,26 +322,33 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 39.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 39.
+<imgs/agent-based-pipeline.png, id=29, 1427.93475pt x 273.4215pt>
+File: imgs/agent-based-pipeline.png Graphic file (type png)
+<use imgs/agent-based-pipeline.png>
+Package pdftex.def Info: imgs/agent-based-pipeline.png  used on input line 59.
+(pdftex.def)             Requested size: 223.58379pt x 42.8096pt.
  [1{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
+
+ <./imgs/agent-based-pipeline.png>] [2
 
 ] (./latex8.aux)
 Package rerunfilecheck Info: File `latex8.out' has not changed.
 (rerunfilecheck)             Checksum: DEBFC157FE48157C9B638F27C8A56A14;699.
  ) 
 Here is how much of TeX's memory you used:
- 11670 strings out of 476001
- 192462 string characters out of 5793197
- 1870068 words of memory out of 5000000
- 31991 multiletter control sequences out of 15000+600000
+ 11688 strings out of 476001
+ 192858 string characters out of 5793197
+ 1871068 words of memory out of 5000000
+ 32004 multiletter control sequences out of 15000+600000
  524422 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,77p,1005b,432s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on latex8.pdf (1 page, 50460 bytes).
+Output written on latex8.pdf (2 pages, 186279 bytes).
 PDF statistics:
- 61 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
- 49 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 70 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
+ 54 words of extra memory for PDF output out of 10000 (max. 10000000)
 

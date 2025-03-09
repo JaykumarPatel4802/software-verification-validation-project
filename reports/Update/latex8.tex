@@ -50,8 +50,16 @@ We will compare the performance difference between 2 frameworks, one that utiliz
 \begin{enumerate}
     \item \textbf{Agentless}: In this framework, an LLM to generate the response directly. This is synonymous with the use of a chatbot. For this framework, we will provide the schemas of every table in the database and the natural language query to the LLM. Then we will run the generated SQL query and evaluate the results based on accuracy, execution time, and resource utilization.
     
-    \item \textbf{Agent-based}: In this framework, there are distinct agents that each play a different role in the generation of the response. There are 3 agents: \textbf{Relevance Agent}, \textbf{Retrieval Agent}, and \textbf{Query Agent}. The \textbf{Relevance Agent} is responsible for determining how many tables are relevant to a natural language query. The \textbf{Schema Agent} will be responsible for retrieving the schemas of the relevant tables from the database given the natural language query. The \textbf{Query Agent} will be responsible for generating the SQL query given the relevant schemas and the natural language query. Then we will run the generated SQL query and evaluate the results based on the same criteria as the Agentless framework.
+    \item \textbf{Agent-based}: In this framework, there are distinct agents that each play a different role in the generation of the response. There are 3 agents: \textbf{Relevance Agent}, \textbf{Retrieval Agent}, and \textbf{Query Agent}. The \textbf{Relevance Agent} is responsible for determining how many tables are relevant to a natural language query. The \textbf{Schema Agent} will be responsible for retrieving the schemas of the relevant tables from the database given the natural language query. The \textbf{Query Agent} will be responsible for generating the SQL query given the relevant schemas and the natural language query. Then we will run the generated SQL query and evaluate the results based on the same criteria as the Agentless framework. The agent-based pipeline can be seen in \ref{fig:agent-based-pipeline}
+
 \end{enumerate}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{imgs/agent-based-pipeline.png}
+    \caption{Agent-based Text2SQL Pipeline}
+    \label{fig:agent-based-pipeline}
+\end{figure}
 
 Additionally, we will compare 3 different LLMs, one of which is GPT-4o and the others have yet to be decided.
 
