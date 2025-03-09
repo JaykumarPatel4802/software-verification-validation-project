@@ -26,7 +26,7 @@ class SchemaHelper:
             return schemas  # Return an empty list if the directory doesn't exist
 
         for filename in os.listdir(schemas_directory):
-            if filename.endswith('.txt'):
+            if filename.endswith('.txt') or filename.endswith('.csv'):
                 with open(os.path.join(schemas_directory, filename), 'r') as file:
                     schema = file.read()
                     schemas.append(schema)
