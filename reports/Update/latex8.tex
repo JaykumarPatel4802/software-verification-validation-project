@@ -1,0 +1,71 @@
+%
+%  $Description: Author guidelines and sample document in LaTeX 2.09$ 
+%
+%  $Author: ienne $
+%  $Date: 1995/09/15 15:20:59 $
+%  $Revision: 1.4 $
+%
+
+\documentclass[10pt,twocolumn]{article} 
+\usepackage{latex8}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\title{Update - Differential Analysis of LLMs in Text2SQL Generation}
+
+\author{Jaykumar Patel\\
+patel.jay4802@utexas.edu\\
+% For a paper whose authors are all at the same institution, 
+% omit the following lines up until the closing ``}''.
+% Additional authors and addresses can be added with ``\and'', 
+% just like the second author.
+\and
+An-Jung Huang\\
+ajhuang@utexas.edu\\
+\and
+Ryan Kolm\\
+ryankolm@utexas.edu\\
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+As large language models (LLMs) continue to envolve and improve, an interesting application of LLMs is in the generation of SQL queries from natural language. This is known as Text2SQL. In this project, we compare the performance of different LLMs in generating SQL queries from natural language.
+We explore 2 different frameworks, \textbf{Agentless} and \textbf{Agentic}, and 3 different LLMs, one of which is GPT-4o and the others are to-be-decided.
+
+\section{Methodology}
+
+In this section, we outline the methodology used for our differential analysis of LLMs in Text2SQL generation.
+
+We will compare the performance difference between the frameworks `Agentless' and `Agentic'.
+\begin{enumerate}
+    \item \textbf{Agentless} frameworks are those that use an LLM to generate the response directly. This is synonymous with the use of a chatbot. For this framework, we will provide the schemas of every table in the database and the natural language query to the LLM. Then we will run the generated SQL query and evaluate the results based on accuracy, execution time, and resource utilization.
+    
+    \item \textbf{Agentic} frameworks are those where there are distinct agents that each play a different role in the generation of the response. For this framework, we will have 2 agents: a \textbf{Schema Agent} and a \textbf{Query Agent}. The \textbf{Schema Agent} will be responsible for retrieving the schemas of the relevant tables from the database given the natural language query. The \textbf{Query Agent} will be responsible for generating the SQL query given the relevant schemas and the natural language query. Then we will run the generated SQL query and evaluate the results based on the same criteria as the Agentless framework.
+\end{enumerate}
+
+Additionally, we will compare 3 different LLMs, one of which is GPT-4o and the others have yet to be decided.
+
+\subsection{Benchmark Dataset}
+
+The SQL databases that we plan to use are the \href{https://www.sqlitetutorial.net/sqlite-sample-database/}{Chinook sample database}, which is a sample database provided by SQLite, and the \href{https://bird-bench.github.io/}{BIRD-SQL Dev Set}. For each of the tables in the Chinook databases, we will create the Schemas, which will be used as the context passed to the LLMs. The BIRD-SQL Dev Set include the Schemas of the tables in its database. Additionally, we will determine 10+ natural language queries for each Database, their corresponding SQL queries, and the results of executing the SQL queries. Using that benchmark dataset as ground truth, we will perform a differential analysis of the performance of 3 LLMs for the 2 frameworks. We will analyze the ability of the LLMs to generate correct SQL queries, as well as the differences in performance between the LLMs and frameworks.
+
+We will test every Model+Framework combination on every natural language query 3 times. This will allow us to determine the consistency of the Model+Framework in generating SQL queries.
+
+\section{Results}
+For this update, we have run the `Agentless' and `Agentic' framework with GPT-4o on Chinook and BIRD-SQL. The Chinook benchmark includes 13 natural language queries and the BIRD-SQL includes 10 natural language queries (3 simple, 4 moderate, and 3 complex -- categorizations provided by BIRD-SQL).
+
+\subsection{Chinook Results}
+
+\subsection{BIRD-SQL Results}
+
+\end{document}
