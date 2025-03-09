@@ -1,3 +1,4 @@
+Table Name: 'income'
 original_column_name,column_name,column_description,data_format,value_description
 income_id,income id,A unique identifier for each record of income,text,
 date_received,date received,the date that the fund received,text,

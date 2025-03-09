@@ -1,3 +1,4 @@
+Table Name: 'zip_code'
 original_column_name,column_name,column_description,data_format,value_description
 zip_code,zip code,The ZIP code itself. A five-digit number identifying a US post office.,integer,
 type,,The kind of ZIP code,text,"commonsense evidence: 

@@ -1,3 +1,4 @@
+Table Name: 'expense'
 original_column_name,column_name,column_description,data_format,value_description
 expense_id,expense id,unique id of income,text,
 expense_description,expense description,A textual description of what the money was spend for,text,
