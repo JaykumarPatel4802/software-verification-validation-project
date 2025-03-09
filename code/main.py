@@ -4,7 +4,7 @@ from ResultsHelper import ResultsHelper
 from benchmark import Benchmark
 import sqlite3
 
-benchmark = Benchmark.Chinook
+benchmark = Benchmark.Bird
 
 def execute(q, sqlite_helper, model):
     sql_query, pipeline_error = model.pipeline(q)

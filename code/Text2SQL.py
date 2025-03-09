@@ -81,6 +81,8 @@ class Text2SQL():
 
         Determine the SQL query that can answer the natural language query. Only generate one SQL query. If you aren't sure, provide your best guess.
         """
+        print("Prompt:")
+        print(prompt)
         structured_llm = self.llm.with_structured_output(GeneratedSQLQuery)
         response = structured_llm.invoke(prompt)
         return response.sql_query
