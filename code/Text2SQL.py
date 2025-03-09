@@ -5,6 +5,7 @@ from pydantic import BaseModel, Field
 import vertexai
 import json
 from enum import Enum
+from benchmark import Benchmark
 load_dotenv()
 
 class Model(Enum):
@@ -22,7 +23,7 @@ class GeneratedSQLQuery(BaseModel):
 
 class Text2SQL():
 
-    def __init__(self, model: Model = Model.ChatGPT, is_agentic: bool = False):
+    def __init__(self, benchmark, model: Model = Model.ChatGPT, is_agentic: bool = False):
         if model == Model.ChatGPT:
             self.llm = init_chat_model("gpt-4o-mini", model_provider="openai")
         elif model == Model.Gemini:
@@ -37,7 +38,8 @@ class Text2SQL():
             self.llm = init_chat_model("MFDoom/deepseek-r1-tool-calling:14b", model_provider="ollama")
         else:
             self.llm = None
-        self.sh = SchemaHelper()
+        self.benchmark = benchmark
+        self.sh = SchemaHelper(benchmark=benchmark)
         self.sh.store_schemas()
         self.is_agentic = is_agentic
 

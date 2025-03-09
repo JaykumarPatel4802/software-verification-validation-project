@@ -89,18 +89,18 @@ QuestionsAnswers = {
         "Answer": None
     },
     # Quary type: conditional selection (CASE WHEN + SELECT) 
-    "Get the employees' name and title if they were born before 1965. Get only the name of the rest of the employees": {
-        "SQL_Query": """
-                      SELECT 
-                        CASE
-                          WHEN BirthDate < '1965-01-01' 
-                          THEN CONCAT(FirstName, ' ', LastName, ' (', Title, ')')
-                          ELSE CONCAT(FirstName, ' ', LastName)
-                        END AS EmployeeInfo
-                      FROM Employee;
-                    """,
-        "Answer": None
-    },
+    # "Get the employees' name and title if they were born before 1965. Get only the name of the rest of the employees": {
+    #     "SQL_Query": """
+    #                   SELECT 
+    #                     CASE
+    #                       WHEN BirthDate < '1965-01-01' 
+    #                       THEN CONCAT(FirstName, ' ', LastName, ' (', Title, ')')
+    #                       ELSE CONCAT(FirstName, ' ', LastName)
+    #                     END AS EmployeeInfo
+    #                   FROM Employee;
+    #                 """,
+    #     "Answer": None
+    # },
     # Quary type: aggregate (COUNT)
     "How many genres are there?": {
         "SQL_Query": """
@@ -241,6 +241,51 @@ QuestionsAnswers = {
                       LIMIT 1;
                     """,
         "Answer": None
+    },   
+}
+
+Bird_QuestionsAnswers = {
+    # Simple
+    "What's Angela Sanders's major?": {
+        "SQL_Query": "SELECT T2.major_name FROM member AS T1 INNER JOIN major AS T2 ON T1.link_to_major = T2.major_id WHERE T1.first_name = 'Angela' AND T1.last_name = 'Sanders'",
+        "Answer": None
     },
-    
+    "How many students in the Student_Club are from the College of Engineering?": {
+        "SQL_Query": "SELECT COUNT(T1.member_id) FROM member AS T1 INNER JOIN major AS T2 ON T1.link_to_major = T2.major_id WHERE T2.college = 'College of Engineering'",
+        "Answer": None
+    },
+    "Please list the full names of the students in the Student_Club that come from the Art and Design Department.": {
+        "SQL_Query": "SELECT T1.first_name, T1.last_name FROM member AS T1 INNER JOIN major AS T2 ON T1.link_to_major = T2.major_id WHERE T2.department = 'Art and Design Department'",
+        "Answer": None
+    },
+    # Moderate
+    "Please list the phone numbers of the students from the Student_Club that has attended the event \"Women's Soccer\".": {
+        "SQL_Query": "SELECT T3.phone FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event INNER JOIN member AS T3 ON T2.link_to_member = T3.member_id WHERE T1.event_name = 'Women''s Soccer'",
+        "Answer": None
+    },
+    "Among the students from the Student_Club who attended the event \"Women's Soccer\", how many of them want a T-shirt that's in medium size?": {
+        "SQL_Query": "SELECT COUNT(T1.event_id) FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event INNER JOIN member AS T3 ON T2.link_to_member = T3.member_id WHERE T1.event_name = 'Women''s Soccer' AND T3.t_shirt_size = 'Medium'",
+        "Answer": None
+    },
+    "How many events of the Student_Club did Sacha Harrison attend in 2019?": {
+        "SQL_Query": "SELECT COUNT(T1.event_id) FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event INNER JOIN member AS T3 ON T2.link_to_member = T3.member_id WHERE T3.first_name = 'Sacha' AND T3.last_name = 'Harrison' AND SUBSTR(T1.event_date, 1, 4) = '2019'",
+        "Answer": None
+    },
+    "Among the events attended by more than 10 members of the Student_Club, how many of them are meetings?": {
+        "SQL_Query": "SELECT T1.event_name FROM event AS T1  INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event GROUP BY T1.event_id  HAVING COUNT(T2.link_to_event) > 10 EXCEPT SELECT T1.event_name  FROM event AS T1  WHERE T1.type = 'Meeting'",
+        "Answer": None
+    },
+    # Challenging
+    "Calculate the total average cost that Elijah Allen spent in the events on September and October.": {
+        "SQL_Query": "SELECT AVG(T2.cost) FROM member AS T1 INNER JOIN expense AS T2 ON T1.member_id = T2.link_to_member WHERE T1.last_name = 'Allen' AND T1.first_name = 'Elijah' AND (SUBSTR(T2.expense_date, 6, 2) = '09' OR SUBSTR(T2.expense_date, 6, 2) = '10')",
+        "Answer": None
+    },
+    "How many times was the budget in Advertisement for \"Yearly Kickoff\" meeting more than \"October Meeting\"?": {
+        "SQL_Query": "SELECT CAST(SUM(CASE WHEN T2.event_name = 'Yearly Kickoff' THEN T1.amount ELSE 0 END) AS REAL) / SUM(CASE WHEN T2.event_name = 'October Meeting' THEN T1.amount ELSE 0 END) FROM budget AS T1 INNER JOIN event AS T2 ON T1.link_to_event = T2.event_id WHERE T1.category = 'Advertisement' AND T2.type = 'Meeting'",
+        "Answer": None
+    },
+    "What is the name of the social event that was attended by the vice president of the Student_Club located at 900 E. Washington St.?": {
+        "SQL_Query": "SELECT T2.event_name FROM attendance AS T1 INNER JOIN event AS T2 ON T2.event_id = T1.link_to_event INNER JOIN member AS T3 ON T1.link_to_member = T3.member_id WHERE T3.position = 'Vice President' AND T2.location = '900 E. Washington St.' AND T2.type = 'Social'",
+        "Answer": None
+    }
 }

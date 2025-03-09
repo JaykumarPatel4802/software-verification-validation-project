@@ -1,13 +1,15 @@
-from QuestionsAnswers import QuestionsAnswers
+from QuestionsAnswers import QuestionsAnswers, Bird_QuestionsAnswers
+from benchmark import Benchmark
 import sqlite3
 
 results_database = "results.db"
-source_database = "database/Chinook_Sqlite.sqlite"
 
 class ResultsHelper:
 
-    def __init__(self, is_agentic: bool = False):
+    def __init__(self, benchmark, is_agentic: bool = False):
         self.is_agentic = is_agentic
+        self.benchmark = benchmark
+        self.benchmark_QA = QuestionsAnswers if benchmark == Benchmark.Chinook else Bird_QuestionsAnswers
 
     def createDB(self):
         def getCreateTableQuery(is_agentic: bool):
@@ -89,8 +91,8 @@ class ResultsHelper:
         try:
             with sqlite3.connect(results_database) as conn:
                 clearTables(conn)
-                for question in QuestionsAnswers:
-                    answer = QuestionsAnswers[question]["Answer"]
+                for question in self.benchmark_QA:
+                    answer = self.benchmark_QA[question]["Answer"]
                     addQuestionAnswer(conn, question, answer)
         except Exception as e:
             print("loadQuestionsAnswers - Failed to connect to database: ", e)
@@ -104,15 +106,17 @@ class ResultsHelper:
             return rows
 
         try:
+            source_database = "database/Chinook_Sqlite.sqlite" if self.benchmark == Benchmark.Chinook else "bird_database/student_club.sqlite"
             with sqlite3.connect(source_database) as conn:
-                for question in QuestionsAnswers:
-                    query = QuestionsAnswers[question]["SQL_Query"]
+                for question in self.benchmark_QA:
+                    query = self.benchmark_QA[question]["SQL_Query"]
                     answer = executeQuery(conn, query)
-                    QuestionsAnswers[question]["Answer"] = str(answer)
+                    self.benchmark_QA[question]["Answer"] = str(answer)
 
         except Exception as e:
             print("determineQuestionsAnswers - Failed to connect to database: ", e)
 
     def setupDB(self):
         self.createDB()
+        self.determineQuestionsAnswers()
         self.loadQuestionsAnswers()

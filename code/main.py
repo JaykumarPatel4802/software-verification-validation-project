@@ -1,7 +1,10 @@
 from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
 from ResultsHelper import ResultsHelper
+from benchmark import Benchmark
 import sqlite3
+
+benchmark = Benchmark.Chinook
 
 def execute(q, sqlite_helper, model):
     sql_query, pipeline_error = model.pipeline(q)
@@ -46,25 +49,24 @@ def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
         print("run_benchmark - Failed to connect to database: ", e)
 
 print("Resetting and Setting Up Results DB")
-rh = ResultsHelper()
-rh.determineQuestionsAnswers()
+rh = ResultsHelper(benchmark=benchmark)
 rh.setupDB()
 
 print("Running Agentless")
 for m in Model:
     if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
-        model = Text2SQL(model=m, is_agentic=False)
+        model = Text2SQL(benchmark=benchmark, model=m, is_agentic=False)
         print("Running Model: ", m)
-        sqlite_helper = SQLiteHelper()
+        sqlite_helper = SQLiteHelper(benchmark=benchmark)
         for i in range(3):
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=False)
 
 print("Running Agentic")
 for m in Model:
     if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
-        model = Text2SQL(model=m, is_agentic=True)
+        model = Text2SQL(benchmark=benchmark, model=m, is_agentic=True)
         print("Running Model: ", m)
-        sqlite_helper = SQLiteHelper()
+        sqlite_helper = SQLiteHelper(benchmark=benchmark)
         for i in range(3):
             print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=True)

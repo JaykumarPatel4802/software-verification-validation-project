@@ -47,7 +47,6 @@ def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
 
 print("Resetting and Setting Up Results DB")
 rh = ResultsHelper()
-rh.determineQuestionsAnswers()
 rh.setupDB()
 
 # print("Running Agentless")
