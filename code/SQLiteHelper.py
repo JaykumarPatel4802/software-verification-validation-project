@@ -1,9 +1,9 @@
 import sqlite3
-from benchmark import Benchmark
+from benchmark import Benchmark, benchmark
 
 class SQLiteHelper:
 
-    def __init__(self, benchmark):
+    def __init__(self):
         self.database_path = "database/Chinook_Sqlite.sqlite" if benchmark == Benchmark.Chinook else "bird_database/student_club.sqlite"
         self.conn = sqlite3.connect(self.database_path)
         self.cur = self.conn.cursor()

@@ -1,10 +1,9 @@
 from Text2SQL import Text2SQL, Model
 from SQLiteHelper import SQLiteHelper
 from ResultsHelper import ResultsHelper
-from benchmark import Benchmark
+from benchmark import Benchmark, benchmark
+from tqdm import tqdm
 import sqlite3
-
-benchmark = Benchmark.Bird
 
 def execute(q, sqlite_helper, model):
     sql_query, pipeline_error = model.pipeline(q)
@@ -35,11 +34,12 @@ def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
         return
     
     try:
-        with sqlite3.connect("results.db") as conn:
+        results_database = "chinook_results.db" if benchmark == Benchmark.Chinook else "bird_results.db"
+        with sqlite3.connect(results_database) as conn:
             cursor = conn.cursor()
             cursor.execute(f"SELECT * FROM {table_name}")
             rows = cursor.fetchall()
-            for row in rows:
+            for row in tqdm(rows, desc="Processing Rows"):
                 id = row[0]
                 question = row[1]
                 sql_query, result = execute(question, sqlite_helper, model)
@@ -49,15 +49,15 @@ def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
         print("run_benchmark - Failed to connect to database: ", e)
 
 print("Resetting and Setting Up Results DB")
-rh = ResultsHelper(benchmark=benchmark)
+rh = ResultsHelper()
 rh.setupDB()
 
 print("Running Agentless")
 for m in Model:
     if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
-        model = Text2SQL(benchmark=benchmark, model=m, is_agentic=False)
+        model = Text2SQL(model=m, is_agentic=False)
         print("Running Model: ", m)
-        sqlite_helper = SQLiteHelper(benchmark=benchmark)
+        sqlite_helper = SQLiteHelper()
         for i in range(3):
             print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=False)
@@ -65,9 +65,9 @@ for m in Model:
 print("Running Agentic")
 for m in Model:
     if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
-        model = Text2SQL(benchmark=benchmark, model=m, is_agentic=True)
+        model = Text2SQL(model=m, is_agentic=True)
         print("Running Model: ", m)
-        sqlite_helper = SQLiteHelper(benchmark=benchmark)
+        sqlite_helper = SQLiteHelper()
         for i in range(3):
             print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=True)

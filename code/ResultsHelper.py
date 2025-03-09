@@ -1,14 +1,13 @@
 from QuestionsAnswers import QuestionsAnswers, Bird_QuestionsAnswers
-from benchmark import Benchmark
+from benchmark import Benchmark, benchmark
 import sqlite3
 
-results_database = "results.db"
+results_database = "chinook_results.db" if benchmark == Benchmark.Chinook else "bird_results.db"
 
 class ResultsHelper:
 
-    def __init__(self, benchmark, is_agentic: bool = False):
+    def __init__(self, is_agentic: bool = False):
         self.is_agentic = is_agentic
-        self.benchmark = benchmark
         self.benchmark_QA = QuestionsAnswers if benchmark == Benchmark.Chinook else Bird_QuestionsAnswers
 
     def createDB(self):
@@ -106,7 +105,7 @@ class ResultsHelper:
             return rows
 
         try:
-            source_database = "database/Chinook_Sqlite.sqlite" if self.benchmark == Benchmark.Chinook else "bird_database/student_club.sqlite"
+            source_database = "database/Chinook_Sqlite.sqlite" if benchmark == Benchmark.Chinook else "bird_database/student_club.sqlite"
             with sqlite3.connect(source_database) as conn:
                 for question in self.benchmark_QA:
                     query = self.benchmark_QA[question]["SQL_Query"]

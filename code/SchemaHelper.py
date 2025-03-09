@@ -2,14 +2,13 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_core.vectorstores import InMemoryVectorStore
 from langchain_core.documents import Document
 from dotenv import load_dotenv
-from benchmark import Benchmark
+from benchmark import Benchmark, benchmark
 
 load_dotenv()
 
 class SchemaHelper:
-    def __init__(self, benchmark):
+    def __init__(self):
         self.vector_store = InMemoryVectorStore(OpenAIEmbeddings(model="text-embedding-3-large"))
-        self.benchmark = benchmark
         self.all_schemas = []
 
     def retrieve_all_schemas(self) -> str:
@@ -18,7 +17,7 @@ class SchemaHelper:
         if self.all_schemas:
             return self.all_schemas
 
-        schemas_directory = "database/schemas/" if self.benchmark == Benchmark.Chinook else "bird_database/schemas/"
+        schemas_directory = "database/schemas/" if benchmark == Benchmark.Chinook else "bird_database/schemas/"
         schemas = []
 
         if not os.path.exists(schemas_directory):
