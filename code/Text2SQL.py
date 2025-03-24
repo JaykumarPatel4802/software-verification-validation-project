@@ -24,7 +24,7 @@ class Text2SQL():
 
     def __init__(self, model: Model = Model.ChatGPT, is_agentic: bool = False):
         if model == Model.ChatGPT:
-            self.llm = init_chat_model("gpt-4o-mini", model_provider="openai")
+            self.llm = init_chat_model("gpt-4o-mini", model_provider="openai", temperature=1)
         elif model == Model.Gemini:
             self.llm = init_chat_model("gemini-1.5-flash", model_provider="google_vertexai")
         elif model == Model.Claude:
@@ -77,7 +77,7 @@ class Text2SQL():
         The query is: {query}
         The relevant schemas are: {relevant_schemas}
 
-        Determine the SQL query that can answer the natural language query. Only generate one SQL query. If you aren't sure, provide your best guess.
+        Determine the SQL query that can answer the natural language query. Only generate one SQL query. The SQL query will be run on SQLite so ensure that the syntax is correct. If you aren't sure, provide your best guess.
         SQLite should be able to run the SQL query you generate.
         """
 

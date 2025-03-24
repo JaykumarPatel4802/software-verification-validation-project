@@ -62,6 +62,7 @@ for m in Model:
         for i in range(3):
             print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=False)
+    print()
 
 print("Running Agentic")
 for m in Model:
