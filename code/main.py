@@ -59,7 +59,7 @@ for m in Model:
         model = Text2SQL(model=m, is_agentic=False)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
-        for i in range(1):
+        for i in range(3):
             print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=False)
 
@@ -70,7 +70,7 @@ for m in Model:
         model = Text2SQL(model=m, is_agentic=True)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
-        for i in range(1):
+        for i in range(3):
             print("Running Iteration: ", i + 1)
             run_benchmark(m, sqlite_helper, model, iteration = i + 1, is_agentic=True)
     print()
