@@ -259,6 +259,22 @@ Bird_QuestionsAnswers = {
         "SQL_Query": "SELECT T1.first_name, T1.last_name FROM member AS T1 INNER JOIN major AS T2 ON T1.link_to_major = T2.major_id WHERE T2.department = 'Art and Design Department'",
         "Answer": None
     },
+    "How many students of the Student_Club have attended the event \"Women's Soccer\"?": {
+        "SQL_Query": "SELECT COUNT(T1.event_id) FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event WHERE T1.event_name = 'Women''s Soccer'",
+        "Answer": None
+    },
+    "What is the event that has the highest attendance of the students from the Student_Club?": {
+        "SQL_Query": "SELECT T1.event_name FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event GROUP BY T1.event_name ORDER BY COUNT(T2.link_to_event) DESC LIMIT 1",
+        "Answer": None
+    },
+    "Which college is the vice president of the Student_Club from?": {
+        "SQL_Query": "SELECT T2.college FROM member AS T1 INNER JOIN major AS T2 ON T1.link_to_major = T2.major_id WHERE T1.position LIKE 'vice president'",
+        "Answer": None
+    },
+    "Please list the event names of all the events attended by Maya Mclean.": {
+        "SQL_Query": "SELECT T1.event_name FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event INNER JOIN member AS T3 ON T2.link_to_member = T3.member_id WHERE T3.first_name = 'Maya' AND T3.last_name = 'Mclean'",
+        "Answer": None
+    },
     # Manually Added:
     # "What is the email of Trent Smith?": {
     #     "SQL_Query": "SELECT T1.email FROM member AS T1 WHERE T1.first_name = 'Trent' AND T1.last_name = 'Smith'",
@@ -296,6 +312,10 @@ Bird_QuestionsAnswers = {
     },
     "Among the events attended by more than 10 members of the Student_Club, how many of them are meetings?": {
         "SQL_Query": "SELECT T1.event_name FROM event AS T1  INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event GROUP BY T1.event_id  HAVING COUNT(T2.link_to_event) > 10 EXCEPT SELECT T1.event_name  FROM event AS T1  WHERE T1.type = 'Meeting'",
+        "Answer": None
+    },
+    "List all the names of events that had an attendance of over 20 students but were not fundraisers.": {
+        "SQL_Query": "SELECT T1.event_name FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event GROUP BY T1.event_id HAVING COUNT(T2.link_to_event) > 20 EXCEPT SELECT T1.event_name FROM event AS T1  WHERE T1.type = 'Fundraiser'",
         "Answer": None
     },
     # Manually Added:
