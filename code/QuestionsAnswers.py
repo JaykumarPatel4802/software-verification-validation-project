@@ -242,6 +242,127 @@ QuestionsAnswers = {
                     """,
         "Answer": None
     },   
+
+    # New Easy Queries (Added on 2025-03-25)
+    "What is the total number of albums?": {
+        "SQL_Query": """
+                      SELECT COUNT(*) AS TotalAlbums FROM Album;
+                    """,
+        "Answer": None
+    },
+    "List all employees with their job titles": {
+        "SQL_Query": """
+                      SELECT FirstName, LastName, Title FROM Employee;
+                    """,
+        "Answer": None
+    },
+    "How many tracks exist in the database?": {
+        "SQL_Query": """
+                      SELECT COUNT(*) AS TotalTracks FROM Track;
+                    """,
+        "Answer": None
+    },
+    "What is the average price of a track?": {
+        "SQL_Query": """
+                      SELECT ROUND(AVG(UnitPrice), 2) AS AverageTrackPrice FROM Track;
+                    """,
+        "Answer": None
+    },
+    
+    # New Medium Queries (Added on 2025-03-25)
+    "Which customer has made the highest number of purchases?": {
+        "SQL_Query": """
+                      SELECT c.FirstName, c.LastName, COUNT(i.InvoiceId) AS PurchaseCount
+                      FROM Customer c
+                      JOIN Invoice i ON c.CustomerId = i.CustomerId
+                      GROUP BY c.CustomerId, c.FirstName, c.LastName
+                      ORDER BY PurchaseCount DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "What is the most popular genre based on track count?": {
+        "SQL_Query": """
+                      SELECT g.Name, COUNT(t.TrackId) AS TrackCount
+                      FROM Genre g
+                      JOIN Track t ON g.GenreId = t.GenreId
+                      GROUP BY g.GenreId, g.Name
+                      ORDER BY TrackCount DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "Which employee has the most customers assigned to them?": {
+        "SQL_Query": """
+                      SELECT e.FirstName, e.LastName, COUNT(c.CustomerId) AS AssignedCustomers
+                      FROM Employee e
+                      JOIN Customer c ON e.EmployeeId = c.SupportRepId
+                      GROUP BY e.EmployeeId, e.FirstName, e.LastName
+                      ORDER BY AssignedCustomers DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "Which track has the longest duration?": {
+        "SQL_Query": """
+                      SELECT Name, Milliseconds FROM Track
+                      ORDER BY Milliseconds DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    
+    # New Hard Queries (Added on 2025-03-25)
+    "Which artist has generated the most revenue from track sales?": {
+        "SQL_Query": """
+                      SELECT ar.Name, SUM(il.UnitPrice * il.Quantity) AS TotalRevenue
+                      FROM InvoiceLine il
+                      JOIN Track t ON il.TrackId = t.TrackId
+                      JOIN Album a ON t.AlbumId = a.AlbumId
+                      JOIN Artist ar ON a.ArtistId = ar.ArtistId
+                      GROUP BY ar.ArtistId, ar.Name
+                      ORDER BY TotalRevenue DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "Which customer has spent the most money on rock music?": {
+        "SQL_Query": """
+                      SELECT c.FirstName, c.LastName, SUM(il.UnitPrice * il.Quantity) AS TotalSpent
+                      FROM InvoiceLine il
+                      JOIN Invoice i ON il.InvoiceId = i.InvoiceId
+                      JOIN Customer c ON i.CustomerId = c.CustomerId
+                      JOIN Track t ON il.TrackId = t.TrackId
+                      JOIN Genre g ON t.GenreId = g.GenreId
+                      WHERE g.Name = 'Rock'
+                      GROUP BY c.CustomerId, c.FirstName, c.LastName
+                      ORDER BY TotalSpent DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "Which month had the highest total invoice amount over all years?": {
+        "SQL_Query": """
+                      SELECT strftime('%m', InvoiceDate) AS Month, SUM(Total) AS TotalSales
+                      FROM Invoice
+                      GROUP BY Month
+                      ORDER BY TotalSales DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    },
+    "Which employee has the highest total sales amount from their assigned customers?": {
+        "SQL_Query": """
+                      SELECT e.FirstName, e.LastName, SUM(i.Total) AS TotalSales
+                      FROM Employee e
+                      JOIN Customer c ON e.EmployeeId = c.SupportRepId
+                      JOIN Invoice i ON c.CustomerId = i.CustomerId
+                      GROUP BY e.EmployeeId, e.FirstName, e.LastName
+                      ORDER BY TotalSales DESC
+                      LIMIT 1;
+                    """,
+        "Answer": None
+    }
 }
 
 
