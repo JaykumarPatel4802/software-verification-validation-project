@@ -24,7 +24,7 @@ class Text2SQL():
 
     def __init__(self, model: Model = Model.ChatGPT, is_agentic: bool = False):
         if model == Model.ChatGPT:
-            self.llm = init_chat_model("gpt-4o-mini", model_provider="openai", temperature=2)
+            self.llm = init_chat_model("gpt-4o-mini", model_provider="openai", temperature=1)
         elif model == Model.Gemini:
             self.llm = init_chat_model("gemini-1.5-flash", model_provider="google_vertexai")
         elif model == Model.Claude:
