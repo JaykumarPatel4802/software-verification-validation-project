@@ -110,8 +110,12 @@ Agents are employed to retrieve relevant schemas for the Agent-based system. The
 
 The results from the study on the Chinook benchmark can be seen in Figure \ref{fig:results-gpt4o-mini-Chinook}. Firstly, the model was able to generate SQL queries for almost all of the natural language queries, which was not the case for the BIRD-SQL benchmark. This could be due to our lack of expertise in SQL, resulting in simple queries in our benchmark. Due to this, for the final report, we are considering evaluating the Model+Framework combinations on a larger BIRD-SQL benchmark, and omitting the Chinook benchmark. Secondly, the perfoormance of both frameworks was very similar, with discrepencies in only 3 queries, shown by the rows with ID 1, 13, and 14. It is interesting to note that Agentless technically performs slightly better than Agent-based, which contradicts the results from the BIRD-SQL benchmark. However, it isn't a significant enough performance difference to draw a difinitive conclusion, especially given the aforementioned simplicity of the benchmark.
 
-\section{Conclusion and Future Work}
+\section{Conclusion}
 
 \ldots
+
+\section{Additional Notes}
+
+We will continue running this study on Llama 3 8B and another LLM, which is still to be determined. As mentioned earlier, we also plan to omit the Chinook benchmark moving forward and expand the size of the BIRD-SQL benchmark. This change provides several benefits. First, manually creating natural language queries and their corresponding ground truth answers is prone to errors, especially given our limited SQL expertise. Second, BIRD-SQL offers natural language queries paired with corresponding SQL queries, enabling us to scale our system to a larger benchmark since we no longer have to manually determine the ground truth answers. Finally, BIRD is a widely used benchmark in Text-to-SQL research and its diversity in schema and query complexity also allows for more robust evaluation of framework and model performance.
 
 \end{document}
