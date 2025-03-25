@@ -41,7 +41,7 @@ ryankolm@utexas.edu\\
 
 As large language models (LLMs) continue to envolve and improve, an interesting application of LLMs is in the generation of SQL queries from natural language. This is known as Text2SQL. Text2SQL can enable non-experts to extract valuable information from a database without having to learn complex query languages like SQL. By simply describing the data they want in plain English, users can leverage LLMs to translate their requests into structured queries that interact directly with a database. This has the potential to democratize data access across organizations, reduce reliance on technical teams for routine data retrieval tasks, and improve overall efficiency in data-driven decision-making.
 
-In this project, we compare the performance of different LLMs in generating SQL queries from natural language. We explore 2 different frameworks, with (Agent-based) and without AI agents (Agentless), and 3 different LLMs, one of which is GPT-4o and the others are to-be-decided. In the Agent-based framework, there are 3 agents that handle specific tasks such as determining the number of relevant tables, retrieving the schemas of the relevant tables, and generating a SQL query given a natural language query. In the Agent-less framework, the schemas of all tables in the database (relevant and irrelevant) is passed as content to the LLM when generting the SQL query given the natural language query. We run our Agent-based and Agentless frameworks with 3 different LLMs on 2 benchmarks -- Chinook sample database and BIRD-SQL Dev Set.
+In this project, we compare the performance of different LLMs in generating SQL queries from natural language. We explore 2 different frameworks, with (Agent-based) and without AI agents (Agentless), and 3 different LLMs, one of which is GPT-4o and the others are to-be-decided. In the Agent-based framework, there are 3 agents that handle specific tasks such as determining the number of relevant tables, retrieving the schemas of the relevant tables, and generating a SQL query given a natural language query. In the Agent-less framework, the schemas of all tables in the database (relevant and irrelevant) is passed as content to the LLM when generting the SQL query given the natural language query. We run our Agent-based and Agentless frameworks with 3 different LLMs on 2 benchmarks -- BIRD-SQL Dev Set and Chinook sample database.
 
 \section{Previous Work}
 
@@ -78,17 +78,14 @@ The main difference between Agentless and Agent-based framework is that during t
 
 \subsection{Benchmark Dataset Selection}
 
-The SQL databases that we plan to use are the \href{https://www.sqlitetutorial.net/sqlite-sample-database/}{Chinook sample database}, which is a sample database provided by SQLite, and the \href{https://bird-bench.github.io/}{BIRD-SQL Dev Set}. For each of the tables in the Chinook databases, we will create the Schemas, which will be used as the context passed to the LLMs. The BIRD-SQL Dev Set include the Schemas of the tables in its database. Additionally, we will determine 10 natural language queries for Chinook and 15 for BIRD-SQL, their corresponding SQL queries, and the results of executing the SQL queries. Using that benchmark dataset as ground truth, we will perform a differential analysis of the performance of 3 LLMs for the 2 frameworks. We will analyze the ability of the LLMs to generate correct SQL queries, as well as the differences in performance between the LLMs and frameworks.
+The SQL databases that we plan to use are the the \href{https://bird-bench.github.io/}{BIRD-SQL Dev Set} and the \href{https://www.sqlitetutorial.net/sqlite-sample-database/}{Chinook sample database}, which is a sample database provided by SQLite. For each of the tables in the Chinook database, we will create the Schemas, which will be used as the context passed to the LLMs. The BIRD-SQL Dev Set includes the Schemas of the tables in its database. Additionally, we will determine 15 natural language queries for BIRD-SQL and Chinook, their corresponding SQL queries, and the results of executing the SQL queries. Using that benchmark dataset as ground truth, we will perform a differential analysis of the performance of 3 LLMs for the 2 frameworks. We will analyze the ability of the LLMs to generate correct SQL queries, as well as the differences in performance between the LLMs and frameworks.
 
 We will test every Model+Framework combination on every natural language query 3 times. This will allow us to determine the consistency of the Model+Framework in generating SQL queries.
 
 \section{Results}
-For this update, we have run the `Agentless' and `Agent-based' framework with GPT-4o on Chinook and BIRD-SQL. The Chinook benchmark includes 10 natural language queries and the BIRD-SQL benchmark includes 15 natural language queries (7 simple, 5 moderate, and 3 challenging -- categorizations provided by BIRD-SQL).
+For this update, we have run the `Agentless' and `Agent-based' framework with GPT-4o on BIRD-SQL and Chinook. BIRD-SQL benchmark contains 7 simple, 5 moderate, and 3 challenging natural language queries -- categories provided by BIRD-SQL. Chinook also contains 15 natural language queries, but their difficulty isn't categorized as they were manually created by us.
 
 \subsection{Correctness and Consistency}
-
-\subsubsection{Chinook}
-
 \subsubsection{BIRD-SQL}
 
 \begin{figure}[h]
@@ -102,5 +99,19 @@ The results from the study on the BIRD-SQL benchmark can be seen in Figure \ref{
 
 Agents are employed to retrieve relevant schemas for the Agent-based system. These relevant schemas are used during the Text2SQL generation. However, for Agentless system, all schemas are used during the Text2SQL generation. This means that irrelevant schemas could be passed as context to the LLM, resulting in incorrect SQL queries. This is consistent with the findings from Figure \ref{fig:results-gpt4o-mini-BIRD}.
 
+\subsubsection{Chinook}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{imgs/Results - Chinook-GPT-4o mini.png}
+    \caption{GPT-4o mini results on Chinook}
+    \label{fig:results-gpt4o-mini-Chinook}
+\end{figure}
+
+The results from the study on the Chinook benchmark can be seen in Figure \ref{fig:results-gpt4o-mini-Chinook}. Firstly, the model was able to generate SQL queries for almost all of the natural language queries, which was not the case for the BIRD-SQL benchmark. This could be due to our lack of expertise in SQL, resulting in simple queries in our benchmark. Due to this, for the final report, we are considering evaluating the Model+Framework combinations on a larger BIRD-SQL benchmark, and omitting the Chinook benchmark. Secondly, the perfoormance of both frameworks was very similar, with discrepencies in only 3 queries, shown by the rows with ID 1, 13, and 14. It is interesting to note that Agentless technically performs slightly better than Agent-based, which contradicts the results from the BIRD-SQL benchmark. However, it isn't a significant enough performance difference to draw a difinitive conclusion, especially given the aforementioned simplicity of the benchmark.
+
+\section{Conclusion and Future Work}
+
+\ldots
 
 \end{document}

@@ -4,4 +4,4 @@ class Benchmark(Enum):
     Chinook = 1
     Bird = 2
 
-benchmark = Benchmark.Bird
+benchmark = Benchmark.Chinook
