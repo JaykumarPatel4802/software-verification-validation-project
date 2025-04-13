@@ -553,27 +553,6 @@ Bird_QuestionsAnswers = {
         "SQL_Query": "SELECT T1.event_name FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event INNER JOIN member AS T3 ON T2.link_to_member = T3.member_id WHERE T3.first_name = 'Maya' AND T3.last_name = 'Mclean'",
         "Answer": None
     },
-    # Manually Added:
-    # "What is the email of Trent Smith?": {
-    #     "SQL_Query": "SELECT T1.email FROM member AS T1 WHERE T1.first_name = 'Trent' AND T1.last_name = 'Smith'",
-    #     "Answer": None
-    # },
-    # "List all unique event locations.": {
-    #     "SQL_Query": "SELECT DISTINCT T1.location FROM event AS T1",
-    #     "Answer": None
-    # },
-    # "How many different colleges are represented in the Student_Club?": {
-    #     "SQL_Query": "SELECT COUNT(DISTINCT T1.college) FROM major AS T1 WHERE T1.major_id IN (SELECT T2.link_to_major FROM member AS T2)",
-    #     "Answer": None
-    # },
-    # "What are the names of members who have no recorded phone number?": {
-    #     "SQL_Query": "SELECT T1.first_name, T1.last_name FROM member AS T1 WHERE T1.phone IS NULL",
-    #     "Answer": None
-    # },
-    # "How many members have attended at least one event?": {
-    #     "SQL_Query": "SELECT COUNT(DISTINCT T1.link_to_member) FROM attendance AS T1",
-    #     "Answer": None
-    # },
     
     # Moderate
     "Please list the phone numbers of the students from the Student_Club that has attended the event \"Women's Soccer\".": {
@@ -596,23 +575,6 @@ Bird_QuestionsAnswers = {
         "SQL_Query": "SELECT T1.event_name FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event GROUP BY T1.event_id HAVING COUNT(T2.link_to_event) > 20 EXCEPT SELECT T1.event_name FROM event AS T1  WHERE T1.type = 'Fundraiser'",
         "Answer": None
     },
-    # Manually Added:
-    # "List the names of members who have incurred an approved expense.": {
-    #     "SQL_Query": "SELECT DISTINCT T1.first_name, T1.last_name FROM member AS T1 INNER JOIN expense AS T2 ON T1.member_id = T2.link_to_member WHERE T2.approved = 'true'",
-    #     "Answer": None
-    # },
-    # "How many members attended at least one event in 2022?": {
-    #     "SQL_Query": "SELECT COUNT(DISTINCT T2.link_to_member) FROM event AS T1 INNER JOIN attendance AS T2 ON T1.event_id = T2.link_to_event WHERE SUBSTR(T1.event_date, 1, 4) = '2022'",
-    #     "Answer": None
-    # },
-    # "How many events have had at least 20 attendees?": {
-    #     "SQL_Query": "SELECT COUNT(T1.event_id) FROM (SELECT T2.link_to_event, COUNT(T2.link_to_member) as num_attendees FROM attendance AS T2 GROUP BY T2.link_to_event HAVING num_attendees >= 20) AS subquery",
-    #     "Answer": None
-    # },
-    # "List the emails of members who attended the most recent event.": {
-    #     "SQL_Query": "SELECT DISTINCT T1.email FROM member AS T1 INNER JOIN attendance AS T2 ON T1.member_id = T2.link_to_member WHERE T2.link_to_event = (SELECT T3.event_id FROM event AS T3 ORDER BY T3.event_date DESC LIMIT 1)",
-    #     "Answer": None
-    # },
     
     # Challenging
     "Calculate the total average cost that Elijah Allen spent in the events on September and October.": {
@@ -627,25 +589,4 @@ Bird_QuestionsAnswers = {
         "SQL_Query": "SELECT T2.event_name FROM attendance AS T1 INNER JOIN event AS T2 ON T2.event_id = T1.link_to_event INNER JOIN member AS T3 ON T1.link_to_member = T3.member_id WHERE T3.position = 'Vice President' AND T2.location = '900 E. Washington St.' AND T2.type = 'Social'",
         "Answer": None
     },
-    # Manually Added:
-    # "Which event had the highest total expense?": {
-    #     "SQL_Query": "SELECT T2.event_name, SUM(T1.cost) AS total_expense FROM expense AS T1 INNER JOIN event AS T2 ON T1.link_to_budget IN (SELECT T3.budget_id FROM budget AS T3 WHERE T3.link_to_event = T2.event_id) GROUP BY T2.event_name ORDER BY total_expense DESC LIMIT 1",
-    #     "Answer": None
-    # },
-    # "Find the member who attended the most events.": {
-    #     "SQL_Query": "SELECT T1.first_name, T1.last_name, COUNT(T2.link_to_event) AS event_count FROM member AS T1 INNER JOIN attendance AS T2 ON T1.member_id = T2.link_to_member GROUP BY T1.member_id ORDER BY event_count DESC LIMIT 1",
-    #     "Answer": None
-    # },
-    # "Which zip code has the most members?": {
-    #     "SQL_Query": "SELECT T1.zip, COUNT(*) AS member_count FROM member AS T1 GROUP BY T1.zip ORDER BY member_count DESC LIMIT 1",
-    #     "Answer": None
-    # },
-    # "Calculate the total amount spent on social events in the last two years.": {
-    #     "SQL_Query": "SELECT SUM(T1.spent) FROM budget AS T1 WHERE T1.link_to_event IN (SELECT T2.event_id FROM event AS T2 WHERE T2.type = 'Social' AND T2.event_date >= DATE('now', '-2 years'))",
-    #     "Answer": None
-    # }
-    # "List the members who have attended all events.": {
-    #     "SQL_Query": "SELECT T1.first_name, T1.last_name FROM member AS T1 WHERE NOT EXISTS (SELECT T2.event_id FROM event AS T2 EXCEPT SELECT T3.link_to_event FROM attendance AS T3 WHERE T3.link_to_member = T1.member_id)",
-    #     "Answer": None
-    # }
 }

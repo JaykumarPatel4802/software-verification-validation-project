@@ -50,12 +50,20 @@ def run_benchmark(m, sqlite_helper, model, iteration, is_agentic = False):
 
 print("Resetting and Setting Up Results DB")
 rh = ResultsHelper()
-rh.setupDB()
+rh.setupDB(reset = True)
+
+to_run = {
+    Model.Llama: True,
+    Model.ChatGPT: False,
+    Model.Gemini: False,
+    Model.Claude: False,
+    Model.DeepSeek: False
+}
 
 print("Running Agentless")
 for m in Model:
 
-    if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
+    if to_run[m]:
         model = Text2SQL(model=m, is_agentic=False)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()
@@ -67,7 +75,7 @@ for m in Model:
 print("Running Agentic")
 for m in Model:
 
-    if m not in [Model.DeepSeek, Model.Llama, Model.Claude, Model.Gemini]:
+    if to_run[m]:
         model = Text2SQL(model=m, is_agentic=True)
         print("Running Model: ", m)
         sqlite_helper = SQLiteHelper()

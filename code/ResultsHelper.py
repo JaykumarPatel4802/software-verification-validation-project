@@ -1,6 +1,7 @@
 from QuestionsAnswers import QuestionsAnswers, Bird_QuestionsAnswers
 from benchmark import Benchmark, benchmark
 import sqlite3
+import json
 
 results_database = "chinook_results.db" if benchmark == Benchmark.Chinook else "bird_results.db"
 
@@ -8,7 +9,17 @@ class ResultsHelper:
 
     def __init__(self, is_agentic: bool = False):
         self.is_agentic = is_agentic
-        self.benchmark_QA = QuestionsAnswers if benchmark == Benchmark.Chinook else Bird_QuestionsAnswers
+        self.benchmark_QA = {}
+
+        # process sampled_questions.json
+        with open('./bird_database/sampled_questions.json', 'r', encoding='utf-8') as f:
+            sampled = json.load(f)
+
+        for item in sampled:
+            self.benchmark_QA[item["question"]] = {
+                "SQL_Query": item["SQL"],
+                "Answer": None
+            }
 
     def createDB(self):
         def getCreateTableQuery(is_agentic: bool):
@@ -115,7 +126,8 @@ class ResultsHelper:
         except Exception as e:
             print("determineQuestionsAnswers - Failed to connect to database: ", e)
 
-    def setupDB(self):
-        self.createDB()
-        self.determineQuestionsAnswers()
-        self.loadQuestionsAnswers()
+    def setupDB(self, reset = True):
+        if reset:
+            self.createDB()
+            self.determineQuestionsAnswers()
+            self.loadQuestionsAnswers()

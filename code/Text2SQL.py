@@ -28,7 +28,7 @@ class Text2SQL():
         elif model == Model.Gemini:
             self.llm = init_chat_model("gemini-1.5-flash", model_provider="google_vertexai")
         elif model == Model.Claude:
-            self.llm = init_chat_model("claude-3-haiku-20240307", model_provider="anthropic")
+            self.llm = init_chat_model("claude-3-5-sonnet-latest", model_provider="anthropic")
         elif model == Model.Llama:
             # self.llm = init_chat_model("llama3-8b-8192", model_provider="groq")
             # self.llm = init_chat_model("llama3.2:1b", model_provider="ollama")
