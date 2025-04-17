@@ -101,37 +101,67 @@ The main difference between Agentless and Agent-based framework is that during t
 
 \subsection{Benchmark Dataset Selection}
 
-The SQL databases that we plan to use are the the \href{https://bird-bench.github.io/}{BIRD-SQL Dev Set} and the \href{https://www.sqlitetutorial.net/sqlite-sample-database/}{Chinook sample database}, which is a sample database provided by SQLite. For each of the tables in the Chinook database, we will create the Schemas, which will be used as the context passed to the LLMs. The BIRD-SQL Dev Set includes the Schemas of the tables in its database. Additionally, we will determine 15 natural language queries for BIRD-SQL and Chinook, their corresponding SQL queries, and the results of executing the SQL queries. Using that benchmark dataset as ground truth, we will perform a differential analysis of the performance of 3 LLMs for the 2 frameworks. We will analyze the ability of the LLMs to generate correct SQL queries, as well as the differences in performance between the LLMs and frameworks.
+For this study, we use the \href{https://bird-bench.github.io/}{BIRD-SQL Dev Set} as the benchmark for evaluation. BIRD-SQL is a widely adopted benchmark in the Text2SQL community, known for its diverse database schemas, realistic query complexity, and standardized difficulty categorizations (simple, moderate, and challenging). Its acceptance as a standard benchmark enables fair comparisons across different methods and models. 
 
-We will test every Model+Framework combination on every natural language query 3 times. This will allow us to determine the consistency of the Model+Framework in generating SQL queries.
+The BIRD-SQL Dev Set includes table descriptions for every database, a collection of natural language questions (NLQs), their corresponding ground-truth SQL queries, and assigned difficulty levels. For our experiments, we focus on the "student-club" database and sample 30 questions, comprising 18 simple, 9 moderate, and 3 challenging examples. This curated subset serves as the ground truth against which we evaluate the performance of the selected LLMs and frameworks.
+
+\subsection{Evaluation Metrics}
+
+We evaluate the performance of each Model+Framework combination across three main metrics: \textbf{correctness}, \textbf{consistency}, and \textbf{execution error rate}.
+
+\begin{itemize}
+    \item \textbf{Correctness} measures how often the generated SQL query produces the correct result for a given natural language question (NLQ). To assess accuracy, we execute the generated SQL query and the corresponding ground-truth SQL query from BIRD-SQL on the database, and determine correctness by comparing their execution results. A generated query is considered correct if its execution result exactly matches the execution result of the ground-truth query. We categorize accuracy based on the number of successful generations out of three attempts for each query: 0/3, 1/3, 2/3, or 3/3 correct generations.
+    \item \textbf{Consistency} captures the stability of a model's outputs across multiple runs. A Model+Framework combination that achieves 3/3 correct generations for a query is considered highly consistent, while fluctuating results (e.g., 1/3 or 2/3 correct) indicate lower consistency.
+    \item \textbf{Execution Error Rate} is the percentage of generated SQL queries that fail to execute, typically due to syntax errors, invalid table references, or improper SQL structure. A lower execution error rate reflects greater robustness and syntactic reliability. A higher execution error rate may indicate hallucinations, misunderstandings of the database schema, or general instability in query generation.
+\end{itemize}
+
+Additionally, we compare the overall performance between the agentless and agent-based frameworks to explore the trade-offs between simplicity (agentless) and modular specialization (agent-based). Each Model+Framework combination is tested on the 30 sampled queries, with three independent runs per query to capture variability.
 
 \section{Results}
-For this update, we have run the `Agentless' and `Agent-based' framework with GPT-4o on BIRD-SQL and Chinook. BIRD-SQL benchmark contains 7 simple, 5 moderate, and 3 challenging natural language queries -- categories provided by BIRD-SQL. Chinook also contains 15 natural language queries, but their difficulty isn't categorized as they were manually created by us.
-
-\subsection{Correctness and Consistency}
-\subsubsection{BIRD-SQL}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.45\textwidth]{imgs/Results - BIRD-GPT-4o mini.png}
-    \caption{GPT-4o mini results on BIRD-SQL}
-    \label{fig:results-gpt4o-mini-BIRD}
+    % First subfigure
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imgs/Claude Results Combined.png}
+        \caption{Accuracy and Consistency of Claude 3.5 Sonnet}
+        \label{fig:claude-results}
+    \end{subfigure}
+    \hfill
+    % Second subfigure
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imgs/GPT Results Combined.png}
+        \caption{Accuracy and Consistency of GPT-4o mini}
+        \label{fig:gpt-results}
+    \end{subfigure}
+    \hfill
+    % Third subfigure
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{imgs/Llama Results Combined.png}
+        \caption{Accuracy and Consistency of Llama3.1 8B}
+        \label{fig:llama-results}
+    \end{subfigure}
+    % Overall caption
+    \caption{Accuracy and Consistency}
+    \label{fig:all-results}
 \end{figure}
-
-The results from the study on the BIRD-SQL benchmark can be seen in Figure \ref{fig:results-gpt4o-mini-BIRD}. Firstly, the results demonstrate the Text2SQL is a challenging task. For some questions, including a simple one, neither frameworks were able to generate a correct SQL query even once. Secondly, the results reveal that most of the time, the Agent-based system is more consistently correct, shown by the rows with ID 1, 6, and 15. Agentless was able to generate a solution when Agent-based failed only once, shown by the row with ID 9.
-
-Agents are employed to retrieve relevant schemas for the Agent-based system. These relevant schemas are used during the Text2SQL generation. However, for Agentless system, all schemas are used during the Text2SQL generation. This means that irrelevant schemas could be passed as context to the LLM, resulting in incorrect SQL queries. This is consistent with the findings from Figure \ref{fig:results-gpt4o-mini-BIRD}.
-
-\subsubsection{Chinook}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.45\textwidth]{imgs/Results - Chinook-GPT-4o mini.png}
-    \caption{GPT-4o mini results on Chinook}
-    \label{fig:results-gpt4o-mini-Chinook}
+    \includegraphics[width=0.45\textwidth]{imgs/Agentless vs Agent-based.png}
+    \caption{Agentless vs Agent-based Comparison}
+    \label{fig:framework-comparison}
 \end{figure}
 
-The results from the study on the Chinook benchmark can be seen in Figure \ref{fig:results-gpt4o-mini-Chinook}. Firstly, the model was able to generate SQL queries for almost all of the natural language queries, which was not the case for the BIRD-SQL benchmark. This could be due to our lack of expertise in SQL, resulting in simple queries in our benchmark. Due to this, for the final report, we are considering evaluating the Model+Framework combinations on a larger BIRD-SQL benchmark, and omitting the Chinook benchmark. Secondly, the perfoormance of both frameworks was very similar, with discrepencies in only 3 queries, shown by the rows with ID 1, 13, and 14. It is interesting to note that Agentless technically performs slightly better than Agent-based, which contradicts the results from the BIRD-SQL benchmark. However, it isn't a significant enough performance difference to draw a difinitive conclusion, especially given the aforementioned simplicity of the benchmark.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.45\textwidth]{imgs/Execution Error Percentage vs Models.png}
+    \caption{Execution Error Comparison}
+    \label{fig:execution-error-comparison}
+\end{figure}
 
 \section{Conclusion}
 

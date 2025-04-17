@@ -24,15 +24,18 @@ class Text2SQL():
 
     def __init__(self, model: Model = Model.ChatGPT, is_agentic: bool = False):
         if model == Model.ChatGPT:
+            # default temp = 0.7
             self.llm = init_chat_model("gpt-4o-mini", model_provider="openai", temperature=1)
         elif model == Model.Gemini:
             self.llm = init_chat_model("gemini-1.5-flash", model_provider="google_vertexai")
         elif model == Model.Claude:
-            self.llm = init_chat_model("claude-3-5-sonnet-latest", model_provider="anthropic")
+            # default temp = 1 : https://docs.anthropic.com/en/api/complete
+            self.llm = init_chat_model("claude-3-5-sonnet-latest", model_provider="anthropic", temperature=1)
         elif model == Model.Llama:
             # self.llm = init_chat_model("llama3-8b-8192", model_provider="groq")
             # self.llm = init_chat_model("llama3.2:1b", model_provider="ollama")
-            self.llm = init_chat_model("llama3.1:8b", model_provider="ollama")
+            # default temp = 0.8 : https://github.com/ollama/ollama/blob/main/docs/modelfile.md#parameter
+            self.llm = init_chat_model("llama3.1:8b", model_provider="ollama", temperature=0.8)
         elif model == Model.DeepSeek:
             self.llm = init_chat_model("MFDoom/deepseek-r1-tool-calling:14b", model_provider="ollama")
         else:
