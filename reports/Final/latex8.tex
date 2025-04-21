@@ -80,8 +80,8 @@ There are many ways that Text2SQL can be implemented. In this study, we compare 
     \item \textbf{Agentless}: In this framework, an LLM to generate the response directly. This is synonymous with the use of a chatbot. For this framework, we will provide the descriptions of every table in the database and the natural language query to the \textbf{LLM}. Then we will run the generated SQL query and evaluate the results based on accuracy, execution time, and resource utilization. The Agentless pipeline can be seen in Figure \ref{fig:agentless-pipeline}
     
     \item \textbf{Agent-based}: In this framework, there are distinct agents that each play a different role in the generation of the response. There are 3 agents: \textbf{Relevance Agent}, \textbf{Retrieval Agent}, and \textbf{Query Agent}. The \textbf{Relevance Agent} is responsible for determining how many tables are relevant to a natural language query. The \textbf{Schema Agent} will be responsible for retrieving the descriptions of the relevant tables from the database given the natural language query. The \textbf{Query Agent} will be responsible for generating the SQL query given the relevant tables' descriptions and the natural language query. Then we will run the generated SQL query and evaluate the results based on the same criteria as the Agentless framework. The agent-based pipeline can be seen in Figure \ref{fig:agent-based-pipeline}
-
 \end{enumerate}
+
 
 \begin{figure}[h]
     \centering
@@ -97,13 +97,16 @@ There are many ways that Text2SQL can be implemented. In this study, we compare 
     \label{fig:agent-based-pipeline}
 \end{figure}
 
-The main difference between Agentless and Agent-based framework is that during the Text2SQL generation, the descriptions of all tables are used for Agentless, whereas only the descriptions of relevant tables are used for Agent-based. The comparison between these frameworks can provide insight into the trade-offs between simplicity and modularity, particularly in terms of scalability and accuracy -- considering Agentless make less calls to the LLM than Agent-based. Specifically, we aim to explore whether introducing specialized agents leads to more accurate query generation, or if the added complexity results in diminishing returns compared to a simpler, monolithic approach. This evaluation can help guide future development of LLM-powered database interfaces.
+The main difference between the Agentless and Agent-based frameworks lies in the Text2SQL generation phase of the pipeline: Agentless uses the descriptions of all tables, whereas Agent-based selectively uses only the descriptions of relevant tables. Comparing these two frameworks provides insight into the trade-offs between simplicity and modularity, particularly in terms of scalability and accuracy---considering that Agentless requires fewer LLM calls than Agent-based. Specifically, we aim to explore whether introducing specialized agents leads to more accurate query generation, or if the added complexity results in diminishing returns compared to a simpler, monolithic approach. This evaluation can help guide the future development of LLM-powered database interfaces.
+
+An important motivation for exploring Agentless abd Agent-based frameworks is the ``lost in the Middle" effect \cite{lostinmiddle}, where LLMs struggle to effectively utilize relevant information when it is in the middle of large contexts. As the context grows---particularly with many irrelevant table descriptions---LLMs can become less precise in their reasoning if the relevant information gets ``lost" in the context. The Agent-based framework addresses this by employing dedicated agents to retrieve and focus only on the most relevant table descriptions, thereby reducing context size, mitigating the ``Lost in the Middle" effect, and potentially improving the model's ability to generate accurate SQL queries.
+
 
 \subsection{Benchmark Dataset Selection}
 
 For this study, we use the \href{https://bird-bench.github.io/}{BIRD-SQL Dev Set} as the benchmark for evaluation. BIRD-SQL is a widely adopted benchmark in the Text2SQL community, known for its diverse database schemas, realistic query complexity, and standardized difficulty categorizations (simple, moderate, and challenging). Its acceptance as a standard benchmark enables fair comparisons across different methods and models. 
 
-The BIRD-SQL Dev Set includes table descriptions for every database, a collection of natural language questions (NLQs), their corresponding ground-truth SQL queries, and assigned difficulty levels. For our experiments, we focus on the "student-club" database and sample 30 questions, comprising 18 simple, 9 moderate, and 3 challenging examples. This curated subset serves as the ground truth against which we evaluate the performance of the selected LLMs and frameworks.
+The BIRD-SQL Dev Set includes table descriptions for every database, a collection of natural language questions (NLQs), their corresponding ground-truth SQL queries, and assigned difficulty levels. For our experiments, we focus on the ``student-club" database and sample 30 questions, comprising 18 simple, 9 moderate, and 3 challenging examples. This curated subset serves as the ground truth against which we evaluate the performance of the selected LLMs and frameworks.
 
 \subsection{Evaluation Metrics}
 
@@ -197,9 +200,5 @@ Interestingly, Claude 3.5 Sonnet, being a larger model, performed better when pa
 \bibliography{latex8}
 
 \pagebreak
-
-\section{Additional Notes}
-
-We will continue running this study on Llama 3 8B and another LLM, which is still to be determined. As mentioned earlier, we also plan to omit the Chinook benchmark moving forward and expand the size of the BIRD-SQL benchmark. This change provides several benefits. First, manually creating natural language queries and their corresponding ground truth answers is prone to errors, especially given our limited SQL expertise. Second, BIRD-SQL offers natural language queries paired with corresponding SQL queries, enabling us to scale our system to a larger benchmark since we no longer have to manually determine the ground truth answers. Finally, BIRD is a widely used benchmark in Text-to-SQL research and its diversity in schema and query complexity also allows for more robust evaluation of framework and model performance.
 
 \end{document}
