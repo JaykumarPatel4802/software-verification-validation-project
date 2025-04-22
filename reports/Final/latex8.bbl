@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}\setlength{\itemsep}{-1ex}\small
+
+\bibitem{model-size}
+A.~B. Abacha, W.~wai Yim, Y.~Fu, Z.~Sun, M.~Yetisgen, F.~Xia, and T.~Lin.
+\newblock Medec: A benchmark for medical error detection and correction in clinical notes, 2025.
+
+\bibitem{xiyan-sql}
+Y.~Gao, Y.~Liu, X.~Li, X.~Shi, Y.~Zhu, Y.~Wang, S.~Li, W.~Li, Y.~Hong, Z.~Luo, J.~Gao, L.~Mou, and Y.~Li.
+\newblock A preview of xiyan-sql: A multi-generator ensemble framework for text-to-sql, 2025.
+
+\bibitem{lostinmiddle}
+N.~F. Liu, K.~Lin, J.~Hewitt, A.~Paranjape, M.~Bevilacqua, F.~Petroni, and P.~Liang.
+\newblock Lost in the middle: How language models use long contexts, 2023.
+
+\bibitem{rule-based}
+T.~Mahmud, K.~M. Azharul~Hasan, M.~Ahmed, and T.~H.~C. Chak.
+\newblock A rule based approach for nlp based query processing.
+\newblock In {\em 2015 2nd International Conference on Electrical Information and Communication Technologies (EICT)}, pages 78--82, 2015.
+
+\bibitem{temperature}
+J.~Murel and J.~Noble.
+\newblock What is llm temperature?, 2024.
+
+\bibitem{chase-sql}
+M.~Pourreza, H.~Li, R.~Sun, Y.~Chung, S.~Talaei, G.~T. Kakkar, Y.~Gan, A.~Saberi, F.~Ozcan, and S.~O. Arik.
+\newblock Chase-sql: Multi-path reasoning and preference optimized candidate selection in text-to-sql, 2024.
+
+\bibitem{semantic-parsing}
+J.~M. Zelle and R.~J. Mooney.
+\newblock Learning to parse database queries using inductive logic programming.
+\newblock In {\em Proceedings of the Thirteenth National Conference on Artificial Intelligence - Volume 2}, AAAI'96, pages 1050--1055. AAAI Press, 1996.
+
+\end{thebibliography}

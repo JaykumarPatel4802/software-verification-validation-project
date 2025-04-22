@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.26)  22 APR 2025 16:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.26)  22 APR 2025 16:08
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -316,6 +316,7 @@ Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package hyperref Info: Link coloring OFF on input line 37.
+ (./latex8.out) (./latex8.out)
 \@outlinefile=\write3
 \openout3 = `latex8.out'.
 
@@ -326,19 +327,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 40.
 
-
-LaTeX Warning: Citation `rule-based' on page 1 undefined on input line 59.
-
-
-LaTeX Warning: Citation `semantic-parsing' on page 1 undefined on input line 59.
-
-
-LaTeX Warning: Citation `chase-sql' on page 1 undefined on input line 61.
-
-
-LaTeX Warning: Citation `xiyan-sql' on page 1 undefined on input line 61.
-
-
 Underfull \hbox (badness 1558) in paragraph at lines 61--62
 \OT1/ptm/m/n/10 gen-er-ates can-di-date queries, and a fi-nal agent se-lects
  []
@@ -347,60 +335,41 @@ Underfull \hbox (badness 1558) in paragraph at lines 61--62
 
 
 ]
-
-LaTeX Warning: Citation `model-size' on page 2 undefined on input line 72.
-
-
-LaTeX Warning: Citation `temperature' on page 2 undefined on input line 74.
-
-
-LaTeX Warning: Reference `fig:agentless-pipeline' on page 2 undefined on input line 80.
-
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 82.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 82.
-
-LaTeX Warning: Reference `fig:agent-based-pipeline' on page 2 undefined on input line 82.
-
-<imgs/Agentless Pipeline.png, id=14, 637.78275pt x 213.79875pt>
+<imgs/Agentless Pipeline.png, id=76, 637.78275pt x 213.79875pt>
 File: imgs/Agentless Pipeline.png Graphic file (type png)
 <use imgs/Agentless Pipeline.png>
 Package pdftex.def Info: imgs/Agentless Pipeline.png  used on input line 88.
 (pdftex.def)             Requested size: 223.58379pt x 74.95139pt.
-<imgs/Agent-based Pipeline.png, id=16, 986.4855pt x 448.074pt>
+<imgs/Agent-based Pipeline.png, id=78, 986.4855pt x 448.074pt>
 File: imgs/Agent-based Pipeline.png Graphic file (type png)
 <use imgs/Agent-based Pipeline.png>
 Package pdftex.def Info: imgs/Agent-based Pipeline.png  used on input line 95.
 (pdftex.def)             Requested size: 223.58379pt x 101.55069pt.
-[2 <./imgs/Agentless Pipeline.png> <./imgs/Agent-based Pipeline.png>]
-
-LaTeX Warning: Citation `lostinmiddle' on page 3 undefined on input line 104.
-
+ [2 <./imgs/Agentless Pipeline.png> <./imgs/Agent-based Pipeline.png>]
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 118.
-(c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
+ (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-<imgs/Claude Results Combined.png, id=33, 1350.54562pt x 393.97188pt>
+<imgs/Claude Results Combined.png, id=95, 1350.54562pt x 393.97188pt>
 File: imgs/Claude Results Combined.png Graphic file (type png)
 <use imgs/Claude Results Combined.png>
 Package pdftex.def Info: imgs/Claude Results Combined.png  used on input line 134.
 (pdftex.def)             Requested size: 223.58379pt x 65.21896pt.
-<imgs/GPT Results Combined.png, id=34, 1350.54562pt x 396.48125pt>
+<imgs/GPT Results Combined.png, id=96, 1350.54562pt x 396.48125pt>
 File: imgs/GPT Results Combined.png Graphic file (type png)
 <use imgs/GPT Results Combined.png>
 Package pdftex.def Info: imgs/GPT Results Combined.png  used on input line 142.
 (pdftex.def)             Requested size: 223.58379pt x 65.63437pt.
-<imgs/Llama Results Combined.png, id=35, 1347.53438pt x 390.45876pt>
+<imgs/Llama Results Combined.png, id=97, 1347.53438pt x 390.45876pt>
 File: imgs/Llama Results Combined.png Graphic file (type png)
 <use imgs/Llama Results Combined.png>
 Package pdftex.def Info: imgs/Llama Results Combined.png  used on input line 150.
 (pdftex.def)             Requested size: 223.58379pt x 64.78038pt.
  [3]
-
-LaTeX Warning: Reference `fig:all-results' on page 4 undefined on input line 159.
-
-
 Underfull \hbox (badness 1609) in paragraph at lines 159--160
 []\OT1/ptm/m/n/10 We eval-u-ate the ac-cu-racy and con-sis-tency of each
  []
@@ -410,25 +379,13 @@ Underfull \hbox (badness 2384) in paragraph at lines 159--160
 \OT1/ptm/m/n/10 Model+Framework com-bi-na-tion by gen-er-at-ing a SQL
  []
 
-
-LaTeX Warning: Reference `fig:claude-results' on page 4 undefined on input line 161.
-
-
-LaTeX Warning: Reference `fig:gpt-results' on page 4 undefined on input line 163.
-
-
-LaTeX Warning: Reference `fig:llama-results' on page 4 undefined on input line 165.
-
-<imgs/Execution Error Percentage vs Models.png, id=42, 602.25pt x 372.39125pt>
+<imgs/Execution Error Percentage vs Models.png, id=107, 602.25pt x 372.39125pt>
 File: imgs/Execution Error Percentage vs Models.png Graphic file (type png)
 <use imgs/Execution Error Percentage vs Models.png>
 Package pdftex.def Info: imgs/Execution Error Percentage vs Models.png  used on input line 173.
 (pdftex.def)             Requested size: 223.58379pt x 138.24854pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Reference `fig:execution-error-comparison' on page 4 undefined on input line 178.
 
 
 Underfull \hbox (badness 1057) in paragraph at lines 180--181
@@ -440,48 +397,33 @@ Underfull \hbox (badness 5460) in paragraph at lines 182--182
 []\elvbf Agentless vs Agent-based Per-for-
  []
 
-<imgs/Agentless vs Agent-based.png, id=54, 602.25pt x 372.39125pt>
+<imgs/Agentless vs Agent-based.png, id=118, 602.25pt x 372.39125pt>
 File: imgs/Agentless vs Agent-based.png Graphic file (type png)
 <use imgs/Agentless vs Agent-based.png>
 Package pdftex.def Info: imgs/Agentless vs Agent-based.png  used on input line 186.
 (pdftex.def)             Requested size: 223.58379pt x 138.24854pt.
-
-LaTeX Warning: Reference `fig:framework-comparison' on page 5 undefined on input line 191.
-
 [5 <./imgs/Execution Error Percentage vs Models.png> <./imgs/Agentless vs Agent-based.png>] (./latex8.bbl)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [6
 
 ] (./latex8.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `latex8.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `latex8.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  4A980EE0A8103A72239FC816E1892767;1878.
+Package rerunfilecheck Info: File `latex8.out' has not changed.
+(rerunfilecheck)             Checksum: 4A980EE0A8103A72239FC816E1892767;1878.
  ) 
 Here is how much of TeX's memory you used:
- 11904 strings out of 476001
- 197040 string characters out of 5793197
+ 11932 strings out of 476001
+ 197407 string characters out of 5793197
  1873068 words of memory out of 5000000
- 32190 multiletter control sequences out of 15000+600000
- 528005 words of font info for 59 fonts, out of 8000000 for 9000
+ 32205 multiletter control sequences out of 15000+600000
+ 529689 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,77p,1098b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on latex8.pdf (6 pages, 675585 bytes).
+Output written on latex8.pdf (6 pages, 680162 bytes).
 PDF statistics:
- 100 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
- 27 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 165 PDF objects out of 1000 (max. 8388607)
+ 131 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 140 words of extra memory for PDF output out of 10000 (max. 10000000)
 
