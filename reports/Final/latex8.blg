@@ -2,7 +2,7 @@ This is BibTeX, Version 0.99d (TeX Live 2023)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: latex8.aux
 I couldn't open style file latex8.bst
----line 46 of file latex8.aux
+---line 53 of file latex8.aux
  : \bibstyle{latex8
  :                 }
 I'm skipping whatever remains of this command
