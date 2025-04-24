@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 13:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 14:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -383,11 +383,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 119--120
 \OT1/ptm/m/n/10 Model+Framework com-bi-na-tion that achieves
  []
 
-
-Underfull \hbox (badness 1210) in paragraph at lines 119--120
-\OT1/ptm/m/n/10 3/3 cor-rect gen-er-a-tions for a query is con-sid-ered
- []
-
 <imgs/Claude Results Combined.png, id=95, 1860.9525pt x 574.39594pt>
 File: imgs/Claude Results Combined.png Graphic file (type png)
 <use imgs/Claude Results Combined.png>
@@ -453,7 +448,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,8n,77p,1094b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on latex8.pdf (6 pages, 616785 bytes).
+Output written on latex8.pdf (6 pages, 616691 bytes).
 PDF statistics:
  165 PDF objects out of 1000 (max. 8388607)
  131 compressed objects within 2 object streams
