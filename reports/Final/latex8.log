@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 16:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 16:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -327,16 +327,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 40.
 
-Underfull \hbox (badness 1097) in paragraph at lines 59--60
-\OT1/ptm/m/n/10 specific en-gi-neer-ing. With the rise of deep learn-ing,
- []
-
-
-Underfull \hbox (badness 1622) in paragraph at lines 59--60
-\OT1/ptm/m/n/10 encoder-decoder ar-chi-tec-tures and pre-trained lan-guage
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 61--62
 []\OT1/ptm/m/n/10 Recent works have ex-plored build-ing Text2SQL
  []
@@ -388,57 +378,58 @@ Underfull \hbox (badness 10000) in paragraph at lines 121--122
 \OT1/ptm/m/n/10 Model+Framework com-bi-na-tion that achieves
  []
 
-<imgs/Claude Results Combined.png, id=95, 1860.9525pt x 574.39594pt>
+<imgs/Claude Results Combined.png, id=96, 1860.9525pt x 574.39594pt>
 File: imgs/Claude Results Combined.png Graphic file (type png)
 <use imgs/Claude Results Combined.png>
 Package pdftex.def Info: imgs/Claude Results Combined.png  used on input line 136.
 (pdftex.def)             Requested size: 223.58379pt x 69.00342pt.
-<imgs/GPT Results Combined.png, id=96, 1855.68282pt x 561.59813pt>
+<imgs/GPT Results Combined.png, id=97, 1855.68282pt x 561.59813pt>
 File: imgs/GPT Results Combined.png Graphic file (type png)
 <use imgs/GPT Results Combined.png>
 Package pdftex.def Info: imgs/GPT Results Combined.png  used on input line 144.
 (pdftex.def)             Requested size: 223.58379pt x 67.66307pt.
-<imgs/Llama Results Combined.png, id=97, 1861.7053pt x 576.65437pt>
+<imgs/Llama Results Combined.png, id=98, 1861.7053pt x 576.65437pt>
 File: imgs/Llama Results Combined.png Graphic file (type png)
 <use imgs/Llama Results Combined.png>
 Package pdftex.def Info: imgs/Llama Results Combined.png  used on input line 152.
 (pdftex.def)             Requested size: 223.58379pt x 69.24832pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3]
-<imgs/Execution Error Percentage vs Models.png, id=108, 602.25pt x 372.39125pt>
+[3 <./imgs/Claude Results Combined.png> <./imgs/GPT Results Combined.png> <./imgs/Llama Results Combined.png>]
+<imgs/Execution Error Percentage vs Models.png, id=111, 602.25pt x 372.39125pt>
 File: imgs/Execution Error Percentage vs Models.png Graphic file (type png)
 <use imgs/Execution Error Percentage vs Models.png>
 Package pdftex.def Info: imgs/Execution Error Percentage vs Models.png  used on input line 173.
 (pdftex.def)             Requested size: 223.58379pt x 138.24854pt.
 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
 Underfull \hbox (badness 5460) in paragraph at lines 182--182
 []\elvbf Agentless vs Agent-based Per-for-
  []
 
-<imgs/Agentless vs Agent-based.png, id=110, 602.25pt x 372.39125pt>
+<imgs/Agentless vs Agent-based.png, id=113, 602.25pt x 372.39125pt>
 File: imgs/Agentless vs Agent-based.png Graphic file (type png)
 <use imgs/Agentless vs Agent-based.png>
 Package pdftex.def Info: imgs/Agentless vs Agent-based.png  used on input line 186.
 (pdftex.def)             Requested size: 223.58379pt x 138.24854pt.
+[4 <./imgs/Execution Error Percentage vs Models.png> <./imgs/Agentless vs Agent-based.png>] (./latex8.bbl)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[4 <./imgs/Claude Results Combined.png> <./imgs/GPT Results Combined.png> <./imgs/Llama Results Combined.png> <./imgs/Execution Error Percentage vs Models.png>] (./latex8.bbl) [5 <./imgs/Agentless vs Agent-based.png>] (./latex8.aux)
+ [5] (./latex8.aux)
 Package rerunfilecheck Info: File `latex8.out' has not changed.
 (rerunfilecheck)             Checksum: 4A980EE0A8103A72239FC816E1892767;1878.
  ) 
 Here is how much of TeX's memory you used:
  11931 strings out of 476001
  197401 string characters out of 5793197
- 1873068 words of memory out of 5000000
+ 1872068 words of memory out of 5000000
  32205 multiletter control sequences out of 15000+600000
  529689 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,77p,1094b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on latex8.pdf (5 pages, 615373 bytes).
+Output written on latex8.pdf (5 pages, 614893 bytes).
 PDF statistics:
  161 PDF objects out of 1000 (max. 8388607)
  128 compressed objects within 2 object streams

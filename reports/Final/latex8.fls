@@ -709,6 +709,8 @@ INPUT imgs/Llama Results Combined.png
 INPUT ./imgs/Llama Results Combined.png
 INPUT ./imgs/Llama Results Combined.png
 INPUT c:/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
+INPUT c:/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT ./imgs/Execution Error Percentage vs Models.png
 INPUT ./imgs/Execution Error Percentage vs Models.png
 INPUT imgs/Execution Error Percentage vs Models.png
@@ -719,8 +721,6 @@ INPUT ./imgs/Agentless vs Agent-based.png
 INPUT imgs/Agentless vs Agent-based.png
 INPUT ./imgs/Agentless vs Agent-based.png
 INPUT ./imgs/Agentless vs Agent-based.png
-INPUT c:/texlive/2023/texmf-dist/fonts/vf/adobe/times/ptmr7t.vf
-INPUT c:/texlive/2023/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT ./latex8.bbl
 INPUT latex8.bbl
 INPUT ./latex8.bbl
