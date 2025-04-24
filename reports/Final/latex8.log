@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 14:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 16:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -342,8 +342,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 61--62
  []
 
 
-Underfull \hbox (badness 4479) in paragraph at lines 61--62
-\OT1/ptm/m/n/10 meth-ods such as divide-and-conquer chain-of-thought
+Underfull \hbox (badness 1314) in paragraph at lines 61--62
+\OT1/ptm/m/n/10 pipelines that lever-age LLMs. CHASE-SQL [[]6[]] and
+ []
+
+
+Underfull \hbox (badness 3735) in paragraph at lines 61--62
+\OT1/ptm/m/n/10 and on-line syn-thetic ex-am-ple gen-er-a-tion to en-hance
  []
 
 [1{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}
@@ -365,51 +370,41 @@ File: imgs/Agent-based Pipeline.png Graphic file (type png)
 Package pdftex.def Info: imgs/Agent-based Pipeline.png  used on input line 96.
 (pdftex.def)             Requested size: 223.58379pt x 101.55069pt.
  [2 <./imgs/Agentless Pipeline.png> <./imgs/Agent-based Pipeline.png>]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 118.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 120.
  (c:/texlive/2023/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 []\OT1/ptm/b/n/10 Consistency: \OT1/ptm/m/n/10 We run each NLQ on each
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 \OT1/ptm/m/n/10 Model+Framework com-bi-na-tion 3 times. A
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 119--120
+Underfull \hbox (badness 10000) in paragraph at lines 121--122
 \OT1/ptm/m/n/10 Model+Framework com-bi-na-tion that achieves
  []
 
 <imgs/Claude Results Combined.png, id=95, 1860.9525pt x 574.39594pt>
 File: imgs/Claude Results Combined.png Graphic file (type png)
 <use imgs/Claude Results Combined.png>
-Package pdftex.def Info: imgs/Claude Results Combined.png  used on input line 134.
+Package pdftex.def Info: imgs/Claude Results Combined.png  used on input line 136.
 (pdftex.def)             Requested size: 223.58379pt x 69.00342pt.
 <imgs/GPT Results Combined.png, id=96, 1855.68282pt x 561.59813pt>
 File: imgs/GPT Results Combined.png Graphic file (type png)
 <use imgs/GPT Results Combined.png>
-Package pdftex.def Info: imgs/GPT Results Combined.png  used on input line 142.
+Package pdftex.def Info: imgs/GPT Results Combined.png  used on input line 144.
 (pdftex.def)             Requested size: 223.58379pt x 67.66307pt.
 <imgs/Llama Results Combined.png, id=97, 1861.7053pt x 576.65437pt>
 File: imgs/Llama Results Combined.png Graphic file (type png)
 <use imgs/Llama Results Combined.png>
-Package pdftex.def Info: imgs/Llama Results Combined.png  used on input line 150.
+Package pdftex.def Info: imgs/Llama Results Combined.png  used on input line 152.
 (pdftex.def)             Requested size: 223.58379pt x 69.24832pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 1609) in paragraph at lines 159--160
-[]\OT1/ptm/m/n/10 We eval-u-ate the ac-cu-racy and con-sis-tency of each
- []
-
-
-Underfull \hbox (badness 2384) in paragraph at lines 159--160
-\OT1/ptm/m/n/10 Model+Framework com-bi-na-tion by gen-er-at-ing a SQL
- []
 
 [3]
 <imgs/Execution Error Percentage vs Models.png, id=108, 602.25pt x 372.39125pt>
@@ -417,41 +412,36 @@ File: imgs/Execution Error Percentage vs Models.png Graphic file (type png)
 <use imgs/Execution Error Percentage vs Models.png>
 Package pdftex.def Info: imgs/Execution Error Percentage vs Models.png  used on input line 173.
 (pdftex.def)             Requested size: 223.58379pt x 138.24854pt.
- [4 <./imgs/Claude Results Combined.png> <./imgs/GPT Results Combined.png> <./imgs/Llama Results Combined.png> <./imgs/Execution Error Percentage vs Models.png>]
+
 Underfull \hbox (badness 5460) in paragraph at lines 182--182
 []\elvbf Agentless vs Agent-based Per-for-
  []
 
-<imgs/Agentless vs Agent-based.png, id=119, 602.25pt x 372.39125pt>
+<imgs/Agentless vs Agent-based.png, id=110, 602.25pt x 372.39125pt>
 File: imgs/Agentless vs Agent-based.png Graphic file (type png)
 <use imgs/Agentless vs Agent-based.png>
 Package pdftex.def Info: imgs/Agentless vs Agent-based.png  used on input line 186.
 (pdftex.def)             Requested size: 223.58379pt x 138.24854pt.
 
-Underfull \vbox (badness 1189) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
 
- (./latex8.bbl [5 <./imgs/Agentless vs Agent-based.png>])
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [6
-
-] (./latex8.aux)
+[4 <./imgs/Claude Results Combined.png> <./imgs/GPT Results Combined.png> <./imgs/Llama Results Combined.png> <./imgs/Execution Error Percentage vs Models.png>] (./latex8.bbl) [5 <./imgs/Agentless vs Agent-based.png>] (./latex8.aux)
 Package rerunfilecheck Info: File `latex8.out' has not changed.
 (rerunfilecheck)             Checksum: 4A980EE0A8103A72239FC816E1892767;1878.
  ) 
 Here is how much of TeX's memory you used:
- 11932 strings out of 476001
- 197407 string characters out of 5793197
+ 11931 strings out of 476001
+ 197401 string characters out of 5793197
  1873068 words of memory out of 5000000
  32205 multiletter control sequences out of 15000+600000
  529689 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,8n,77p,1094b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on latex8.pdf (6 pages, 616691 bytes).
+Output written on latex8.pdf (5 pages, 615373 bytes).
 PDF statistics:
- 165 PDF objects out of 1000 (max. 8388607)
- 131 compressed objects within 2 object streams
- 35 named destinations out of 1000 (max. 500000)
+ 161 PDF objects out of 1000 (max. 8388607)
+ 128 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
  140 words of extra memory for PDF output out of 10000 (max. 10000000)
 
