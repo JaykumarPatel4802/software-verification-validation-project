@@ -106,7 +106,7 @@ An important motivation for exploring agentless and agent-based frameworks is th
 
 \subsection{Benchmark Dataset Selection}
 
-We use \href{https://bird-bench.github.io/}{BIRD-SQL} as the benchmark for evaluation. It is a widely adopted benchmark in the Text2SQL community, containing cross-domain databases and NLQs of varying complexities (simple, moderate, and challenging). As a result, BIRD-SQL allows for a fair comparison across the different models and frameworks.
+We use \href{https://bird-bench.github.io/}{BIRD-SQL} as the benchmark for evaluation. It is a widely adopted benchmark in the Text2SQL community, containing cross-domain SQLite databases and NLQs of varying complexities (simple, moderate, and challenging). As a result, BIRD-SQL allows for a fair comparison across the different models and frameworks.
 
 The BIRD-SQL includes table descriptions for every database, a collection of NLQs, their corresponding ground-truth SQL queries, and their difficulty levels. For our experiments, we focus on the ``student-club" database. This database has 8 tables making the structure complex enough for the problems to be interesting. We sample 30 questions (18 simple, 9 moderate, and 3 challenging) which we evaluate our LLMs and frameworks against.
 
