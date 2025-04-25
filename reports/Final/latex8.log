@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 21:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.28)  24 APR 2025 21:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -327,18 +327,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 40.
 
-Underfull \hbox (badness 10000) in paragraph at lines 61--62
-[]\OT1/ptm/m/n/10 Recent works have ex-plored build-ing Text2SQL
+Underfull \hbox (badness 3138) in paragraph at lines 61--62
+[]\OT1/ptm/m/n/10 CHASE-SQL [[]6[]] and XiYan-SQL [[]2[]] are agen-tic
  []
 
 
-Underfull \hbox (badness 1314) in paragraph at lines 61--62
-\OT1/ptm/m/n/10 pipelines that lever-age LLMs. CHASE-SQL [[]6[]] and
- []
-
-
-Underfull \hbox (badness 3735) in paragraph at lines 61--62
-\OT1/ptm/m/n/10 and on-line syn-thetic ex-am-ple gen-er-a-tion to en-hance
+Underfull \hbox (badness 2261) in paragraph at lines 61--62
+\OT1/ptm/m/n/10 and-conquer chain-of-thought (CoT) rea-son-ing, query-
  []
 
 [1{c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc}
@@ -429,7 +424,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,8n,77p,1096b,586s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on latex8.pdf (5 pages, 614843 bytes).
+Output written on latex8.pdf (5 pages, 614820 bytes).
 PDF statistics:
  161 PDF objects out of 1000 (max. 8388607)
  128 compressed objects within 2 object streams
