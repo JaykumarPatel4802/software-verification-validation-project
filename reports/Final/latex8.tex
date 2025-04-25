@@ -40,7 +40,7 @@ ryankolm@utexas.edu\\
 
 \begin{abstract}
 
-Large Language Models (LLMs) have shown remarkable capabilities in translating natural language questions into executable SQL queries, a task known as Text2SQL. In this work, we conduct a systematic evaluation of several state-of-the-art LLMs and two distinct Text2SQL frameworks: agentless and agent-based pipelines. Our experiments assess accuracy, consistency, and execution error on the BIRD-SQL benchmark. By enabling users to query structured databases through natural language, effective Text2SQL systems have the potential to democratize data access, allowing non-developers to retrieve complex information from structured databases without needing specialized technical skills. Our study aims to inform future design choices for building more reliable and accessible natural language interfaces to databases.
+Large Language Models (LLMs) have shown remarkable capabilities in translating natural language questions into executable SQL queries, a task known as Text2SQL. In this work, we conduct a systematic evaluation of several state-of-the-art LLMs and two distinct Text2SQL frameworks: agentless and agent-based pipelines. Our experiments assess accuracy, consistency, and execution error on the BIRD-SQL benchmark. By enabling users to query structured databases through natural language, effective Text2SQL systems have the potential to democratize data access, allowing non-developers to retrieve information from databases without needing technical skills. Our study aims to inform future design choices for building more reliable and accessible natural language interfaces to databases.
         
 % We find that model choice and framework design substantially influence both the correctness and reliability of generated SQL, with trade-offs between simplicity, performance, and interpretability. Our results provide actionable insights for practitioners building natural language interfaces to databases, and highlight open challenges in making Text2SQL systems more dependable in real-world applications.
 
@@ -175,7 +175,7 @@ Across all models, simple questions were solved more consistently than moderate 
     \label{fig:execution-error-comparison}
 \end{figure}
 
-Execution error rate measures the proportion of generated queries that failed to run due to syntax errors, invalid table references, or other structural mistakes. Figure \ref{fig:execution-error-comparison} summarizes the execution error rates across models and frameworks.
+Execution error rate measures the proportion of generated queries that failed to run due to syntax errors, invalid table references, or other structural mistakes. Figure \ref{fig:execution-error-comparison} summarizes the execution error across models and frameworks.
 
 Claude 3.5 Sonnet had the least error rate of just 1.11\% under the agentless framework and 0.00\% under agent-based, meaning that it consistently generated syntactically correct SQL queries. GPT-4o Mini had a moderate execution error rate of 13.33\% across both frameworks. Llama 3.1 8B had the highest execution error rates, exceeding 48\% under both frameworks. This means approaximately half of its generated SQL queries had syntax issues or invalid references to columns/tables. This results makes sense since Claude 3.5 Sonnet and GPT-4o Mini are known for their coding abilities.
 
